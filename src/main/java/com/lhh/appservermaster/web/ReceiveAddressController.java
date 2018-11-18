@@ -1,0 +1,43 @@
+package com.lhh.appservermaster.web;
+
+import com.lhh.appservermaster.domain.ReceiveAddress;
+import com.lhh.appservermaster.service.ReceiveAddressService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class ReceiveAddressController {
+    @Autowired
+    private ReceiveAddressService receiveAddressService;
+
+    @GetMapping("receive-address/all")
+    public List<ReceiveAddress> getAllReceiveAddresses(){
+        return receiveAddressService.getAllReceiveAddresses();
+    }
+
+    @GetMapping("/receive-address")
+    public ReceiveAddress getReceiveAddressByID(@RequestParam Integer receiveId){
+        return receiveAddressService.getReceiveAddressByID(receiveId);
+
+    }
+    @PostMapping("receive-address/add")
+    public boolean addReceiveAddress(ReceiveAddress receiveAddress){
+        return receiveAddressService.addReceiveAddress(receiveAddress);
+    }
+
+    @PostMapping("receive-address/uptate")
+    public boolean updateReceiveAddressByID(ReceiveAddress receiveAddress){
+        return receiveAddressService.updateReceiveAddressByID(receiveAddress);
+    }
+
+    @PostMapping("receive-address/delete")
+    public boolean deleteReceiveAddressByID(@RequestParam Integer receiveId){
+        return receiveAddressService.deleteReceiveAddressByID(receiveId);
+    }
+
+}

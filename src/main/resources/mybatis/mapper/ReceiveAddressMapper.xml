@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.lhh.appservermaster.dao.ReceiveAddressDao" > <!-- 项目的dao层 -->
+    <resultMap id="BaseResultMap" type="com.lhh.appservermaster.domain.ReceiveAddress" > <!-- 实体类 -->
+        <id column="receiveId" property="receiveId" jdbcType="INTEGER" />            <!-- 列名映射 -->
+        <result column="receiveName" property="receiveName" jdbcType="VARCHAR" />
+        <result column="receivePhone" property="receivePhone" jdbcType="VARCHAR" />
+        <result column="receiveState" property="receiveState" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        receiveId, receiveName, receivePhone, receiveState
+    </sql>
+
+    <!-- 获取所有收货地址信息 -->
+    <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+	   FROM receiveAddress
+    </select>
+
+    <!-- 插入一条收货地址信息 -->
+    <insert id="addReceiveAddress" parameterType="com.lhh.appservermaster.domain.ReceiveAddress">
+        insert into receiveAddress
+        (
+          receiveId, receiveName, receivePhone, receiveState
+        )
+        VALUES
+        (
+          #{receiveAddress.receiveId,jdbcType=INTEGER},
+          #{receiveAddress.receiveName,jdbcType=VARCHAR},
+          #{receiveAddress.receivePhone,jdbcType=VARCHAR},
+          #{receiveAddress.receiveState,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <!-- 根据id查询收货地址信息 -->
+    <select id="getReceiveAddressByID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from receiveAddress
+        where receiveId = #{receiveId,jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据id更新收货地址信息 -->
+    <update id="updateReceiveAddressByID" parameterType="com.lhh.appservermaster.domain.ReceiveAddress">
+        update receiveAddress
+        <set>
+            <if test = "receiveAddress.receiveName != null">
+                receiveName = #{receiveAddress.receiveName,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "receiveAddress.receivePhone != null">
+                receivePhone = #{receiveAddress.receivePhone,jdbcType=VARCHAR},
+            </if>
+            <if test = "receiveAddress.receiveState != null">
+                receiveState = #{receiveAddress.receiveState,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where receiveId = #{receiveAddress.receiveId,jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据id删除收货地址信息 -->
+    <delete id="deleteReceiveAddressByID" parameterType="java.lang.Integer">
+        delete from receiveAddress
+        where receiveId = #{receiveId,jdbcType=INTEGER}
+    </delete>
+</mapper>

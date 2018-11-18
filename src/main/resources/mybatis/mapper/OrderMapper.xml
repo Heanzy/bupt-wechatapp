@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.lhh.appservermaster.dao.OrderDao" > <!-- 项目的dao层 -->
+    <resultMap id="BaseResultMap" type="com.lhh.appservermaster.domain.Order" > <!-- 实体类 -->
+        <id column="orderId" property="orderId" jdbcType="INTEGER" />            <!-- 列名映射 -->
+        <result column="orderName" property="orderName" jdbcType="VARCHAR" />
+        <result column="userId" property="userId" jdbcType="INTEGER" />
+        <result column="expressCompanyName" property="expressCompanyName" jdbcType="VARCHAR" />
+        <result column="expressCompanyAddress" property="expressCompanyAddress" jdbcType="VARCHAR" />
+        <result column="receiveAddressId" property="receiveAddressId" jdbcType="INTEGER" />
+        <result column="addTime" property="addTime" jdbcType="VARCHAR" />
+        <result column="orderState" property="orderState" jdbcType="VARCHAR" />
+        <result column="orderPay" property="orderPay" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="receiveCode" property="receiveCode" jdbcType="INTEGER" />
+        <result column="userPhone" property="userPhone" jdbcType="VARCHAR" />
+        <result column="orderEvaluate" property="orderEvaluate" jdbcType="VARCHAR" />
+        <result column="takeUserId" property="takeUserId" jdbcType="INTEGER" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId
+    </sql>
+
+    <!-- 获取所有订单信息 -->
+    <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+	   FROM orders
+    </select>
+
+    <!-- 插入一条订单信息 -->
+    <insert id="addOrder" parameterType="com.lhh.appservermaster.domain.Order">
+        insert into orders
+        (
+          orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId
+        )
+        VALUES
+        (
+          #{order.orderName,jdbcType=VARCHAR},
+          #{order.userId,jdbcType=INTEGER},
+          #{order.expressCompanyName,jdbcType=VARCHAR},
+          #{order.expressCompanyAddress,jdbcType=VARCHAR},
+          #{order.receiveAddressId,jdbcType=INTEGER},
+          #{order.addTime,jdbcType=VARCHAR},
+          #{order.orderState,jdbcType=VARCHAR},
+          #{order.orderPay,jdbcType=VARCHAR},
+          #{order.remark,jdbcType=VARCHAR},
+          #{order.receiveCode,jdbcType=VARCHAR},
+          #{order.userPhone,jdbcType=VARCHAR},
+          #{order.orderEvaluate,jdbcType=VARCHAR},
+          #{order.takeUserId,jdbcType=INTEGER}
+        )
+
+    </insert>
+
+    <!-- 根据id查询订单信息 -->
+    <select id="getOrderByID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from orders
+        where orderId = #{orderId,jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据id更新订单信息 -->
+    <update id="updateOrderInfoByID" parameterType="com.lhh.appservermaster.domain.Order">
+        update orders
+        <set>
+            <if test = "order.orderName != null">
+                orderName = #{order.orderName,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.userId != null">
+                userId = #{order.userId,jdbcType=INTEGER},
+            </if>
+
+            <if test = "order.expressCompanyName != null">
+                expressCompanyName = #{order.expressCompanyName,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.expressCompanyAddress != null">
+                expressCompanyAddress = #{order.expressCompanyAddress,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.receiveAddressId != null">
+                receiveAddressId = #{order.receiveAddressId,jdbcType=INTEGER},
+            </if>
+
+            <if test = "order.addTime != null">
+                addTime = #{order.addTime,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.orderState != null">
+                orderState = #{order.orderState,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.orderPay != null">
+                orderPay = #{order.orderPay,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.remark != null">
+                remark = #{order.remark,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.receiveCode != null">
+                receiveCode = #{order.receiveCode,jdbcType=INTEGER},
+            </if>
+
+            <if test = "order.userPhone != null">
+                userPhone = #{order.userPhone,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.orderEvaluate != null">
+                orderEvaluate = #{order.orderEvaluate,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.takeUserId != null">
+                takeUserId = #{order.takeUserId,jdbcType=INTEGER},
+            </if>
+
+        </set>
+        where orderId = #{order.orderId,jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据id删除订单信息 -->
+    <delete id="deleteOrderByID" parameterType="java.lang.Integer">
+        delete from orders
+        where orderId = #{orderId,jdbcType=INTEGER}
+    </delete>
+
+    <select id="getOrdersByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List" />
+        from orders
+        where userId = #{userId,jdbcType=INTEGER}
+    </select>
+</mapper>
