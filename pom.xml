@@ -5,7 +5,7 @@
 
     <groupId>com.lhh</groupId>
     <artifactId>appserver-master</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-dev</version>
     <packaging>war</packaging>
 
     <!--

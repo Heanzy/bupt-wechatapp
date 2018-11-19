@@ -1,6 +1,8 @@
 package com.lhh.appservermaster.service;
 
 import com.lhh.appservermaster.domain.User;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 
@@ -29,11 +31,18 @@ public interface UserService {
     boolean updateUserInfo(User user);
 
     /**
-     *
+     * 删除用户信息
      * @param ID 用户id
      * @return true 根据用户id删除用户信息
      */
     boolean deleteUserByID(Integer ID);
+
+    /**
+     * 保存用户上传的图片
+     * @param multipartFile
+     * @return 图片存储路径
+     */
+    String saveUserImg(MultipartFile multipartFile,String path);
 
 }
 
