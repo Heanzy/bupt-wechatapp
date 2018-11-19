@@ -46,7 +46,7 @@ public class UserServiceimp implements UserService {
             e.printStackTrace();
             return null;
         }
-        fullFileName = path + File.separator + fullFileName;
+        //fullFileName = path + File.separator + fullFileName;
         return fullFileName;
     }
 

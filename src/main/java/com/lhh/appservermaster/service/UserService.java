@@ -40,7 +40,7 @@ public interface UserService {
     /**
      * 保存用户上传的图片
      * @param multipartFile
-     * @return 图片存储路径
+     * @return 图片UUID
      */
     String saveUserImg(MultipartFile multipartFile,String path);
 

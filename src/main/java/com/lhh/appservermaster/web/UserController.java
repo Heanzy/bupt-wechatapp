@@ -2,7 +2,6 @@ package com.lhh.appservermaster.web;
 
 import com.lhh.appservermaster.domain.User;
 import com.lhh.appservermaster.service.UserService;
-import com.lhh.appservermaster.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,8 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private String location = "D:\\app-server\\user-images";
-    //private String remote = "/home/app-server/user-images";
+    // private String location = "D:\\app-server\\user-images";
+    private String remote = "/home/app-server/user-images";
 
     @Autowired
     private UserService userService;
@@ -50,8 +49,7 @@ public class UserController {
         if (multipartFile.isEmpty()) {
             return "failed";
         }
-        String fullFileName = userService.saveUserImg(multipartFile,location);
-        System.out.println(fullFileName);
+        String fullFileName = userService.saveUserImg(multipartFile,remote);
         return fullFileName;
     }
 }
