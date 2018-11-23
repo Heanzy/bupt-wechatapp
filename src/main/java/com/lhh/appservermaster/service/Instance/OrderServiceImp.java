@@ -2,6 +2,7 @@ package com.lhh.appservermaster.service.Instance;
 
 import com.lhh.appservermaster.dao.OrderDao;
 import com.lhh.appservermaster.domain.Order;
+import com.lhh.appservermaster.domain.query.OrderQuery;
 import com.lhh.appservermaster.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,5 +43,10 @@ public class OrderServiceImp implements OrderService {
     @Override
     public boolean deleteOrderByID(Integer orderID) {
         return orderDao.deleteOrderByID(orderID);
+    }
+
+    @Override
+    public List<Order> getOrdersByQuery(OrderQuery orderQuery) {
+        return orderDao.getOrdersByQuery(orderQuery);
     }
 }

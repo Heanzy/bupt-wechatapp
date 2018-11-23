@@ -27,10 +27,11 @@ public class ReceiveAddressController {
     }
     @PostMapping("receive-address/add")
     public boolean addReceiveAddress(ReceiveAddress receiveAddress){
+        System.out.println(receiveAddress);
         return receiveAddressService.addReceiveAddress(receiveAddress);
     }
 
-    @PostMapping("receive-address/uptate")
+    @PostMapping("receive-address/update")
     public boolean updateReceiveAddressByID(ReceiveAddress receiveAddress){
         return receiveAddressService.updateReceiveAddressByID(receiveAddress);
     }
@@ -40,4 +41,8 @@ public class ReceiveAddressController {
         return receiveAddressService.deleteReceiveAddressByID(receiveId);
     }
 
+    @GetMapping("receive-address/receiveName")
+    public List<ReceiveAddress> getAddressesByUserReceiveName(@RequestParam String receiveName){
+        return receiveAddressService.getAddressesByReceiveUserName(receiveName);
+    }
 }

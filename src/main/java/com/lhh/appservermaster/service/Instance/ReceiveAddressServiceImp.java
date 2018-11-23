@@ -11,8 +11,14 @@ import java.util.List;
 
 @Component
 public class ReceiveAddressServiceImp implements ReceiveAddressService {
+
     @Autowired
     private ReceiveAddressDao receiveAddressDao;
+
+    @Override
+    public List<ReceiveAddress> getAddressesByReceiveUserName(String receiveUserName) {
+        return receiveAddressDao.getAddressesByReceiveUserName(receiveUserName);
+    }
 
     @Override
     public List<ReceiveAddress> getAllReceiveAddresses() {

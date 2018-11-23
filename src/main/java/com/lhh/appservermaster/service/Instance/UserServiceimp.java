@@ -54,4 +54,9 @@ public class UserServiceimp implements UserService {
     public User getOneUserInfoByID(Integer ID){
         return userDao.getUserByID(ID);
     }
+
+    @Override
+    public User getUserByName(String userName) {
+        return userDao.getUserByName(userName);
+    }
 }

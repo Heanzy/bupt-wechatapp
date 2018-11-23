@@ -43,4 +43,11 @@ public interface ReceiveAddressDao {
      */
     boolean deleteReceiveAddressByID(@Param("receiveId") Integer receiveId);
 
+    /**
+     *
+     * @param receiveName
+     * @return 根据收货人名字查询
+     */
+    List<ReceiveAddress> getAddressesByReceiveUserName(@Param("receiveName")String receiveName);
+
 }

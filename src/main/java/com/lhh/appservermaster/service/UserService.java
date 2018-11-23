@@ -44,5 +44,12 @@ public interface UserService {
      */
     String saveUserImg(MultipartFile multipartFile,String path);
 
+    /**
+     * 根据用户名查询用户信息
+     * @param userName
+     * @return 用户信息
+     */
+    User getUserByName(String userName);
+
 }
 

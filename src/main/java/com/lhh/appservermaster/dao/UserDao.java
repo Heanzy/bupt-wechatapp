@@ -40,4 +40,11 @@ public interface UserDao {
      * @return true 成功删除用户信息
      */
     boolean deleteUserByID(@Param("userId") Integer ID);
+
+    /**
+     *
+     * @param userName
+     * @return 根据用户名查询用户信息
+     */
+    User getUserByName(@Param("userName") String userName);
 }

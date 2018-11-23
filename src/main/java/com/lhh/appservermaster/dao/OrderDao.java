@@ -1,6 +1,7 @@
 package com.lhh.appservermaster.dao;
 
 import com.lhh.appservermaster.domain.Order;
+import com.lhh.appservermaster.domain.query.OrderQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -49,4 +50,11 @@ public interface OrderDao {
      * @return true 成功删除订单信息
      */
     boolean deleteOrderByID(@Param("orderId") Integer orderId);
+
+    /**
+     * 根据字段orderName userId expressAdressName orderPay addTime模糊查询
+     * @param orderQuery
+     * @return 查询结果
+     */
+    List<Order> getOrdersByQuery(@Param("orderQuery") OrderQuery orderQuery);
 }

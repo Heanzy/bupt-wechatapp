@@ -7,10 +7,11 @@
         <result column="receiveName" property="receiveName" jdbcType="VARCHAR" />
         <result column="receivePhone" property="receivePhone" jdbcType="VARCHAR" />
         <result column="receiveState" property="receiveState" jdbcType="VARCHAR" />
+        <result column="receiveAddressName" property="receiveAddressName" jdbcType="VARCHAR" />
     </resultMap>
     
     <sql id="Base_Column_List" >
-        receiveId, receiveName, receivePhone, receiveState
+        receiveId, receiveName, receivePhone, receiveState, receiveAddressName
     </sql>
 
     <!-- 获取所有收货地址信息 -->
@@ -24,14 +25,15 @@
     <insert id="addReceiveAddress" parameterType="com.lhh.appservermaster.domain.ReceiveAddress">
         insert into receiveAddress
         (
-          receiveId, receiveName, receivePhone, receiveState
+          receiveId, receiveName, receivePhone, receiveState, receiveAddressName
         )
         VALUES
         (
           #{receiveAddress.receiveId,jdbcType=INTEGER},
           #{receiveAddress.receiveName,jdbcType=VARCHAR},
           #{receiveAddress.receivePhone,jdbcType=VARCHAR},
-          #{receiveAddress.receiveState,jdbcType=VARCHAR}
+          #{receiveAddress.receiveState,jdbcType=VARCHAR},
+          #{receiveAddress.receiveAddressName,jdbcType=VARCHAR}
         )
 
     </insert>
@@ -58,6 +60,9 @@
             <if test = "receiveAddress.receiveState != null">
                 receiveState = #{receiveAddress.receiveState,jdbcType=VARCHAR},
             </if>
+            <if test = "receiveAddress.receiveAddressName != null">
+                receiveAddressName = #{receiveAddress.receiveAddressName,jdbcType=VARCHAR},
+            </if>
 
         </set>
         where receiveId = #{receiveAddress.receiveId,jdbcType=INTEGER}
@@ -68,4 +73,12 @@
         delete from receiveAddress
         where receiveId = #{receiveId,jdbcType=INTEGER}
     </delete>
+
+    <!-- 根据收货人名字查询地址信息-->
+    <select id="getAddressesByReceiveUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from receiveAddress
+        where receiveName = #{receiveName,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -1,7 +1,7 @@
 package com.lhh.appservermaster.service;
 
 import com.lhh.appservermaster.domain.Order;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import com.lhh.appservermaster.domain.query.OrderQuery;
 
 import java.util.List;
 
@@ -47,4 +47,11 @@ public interface OrderService {
      * @return true 成功删除订单
      */
     boolean deleteOrderByID(Integer orderID);
+
+    /**
+     * 根据字段orderName userId expressAdressName orderPay addTime模糊查询
+     * @param orderQuery
+     * @return 查询结果
+     */
+    List<Order> getOrdersByQuery(OrderQuery orderQuery);
 }

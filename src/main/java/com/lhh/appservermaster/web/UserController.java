@@ -52,4 +52,9 @@ public class UserController {
         String fullFileName = userService.saveUserImg(multipartFile,remote);
         return fullFileName;
     }
+
+    @GetMapping("/user/userName")
+    public @ResponseBody User getUserByName(@RequestParam("userName") String userName){
+        return userService.getUserByName(userName);
+    }
 }

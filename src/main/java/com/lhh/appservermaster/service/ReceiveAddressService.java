@@ -40,4 +40,11 @@ public interface ReceiveAddressService {
      */
     boolean deleteReceiveAddressByID(Integer receiveId);
 
+    /**
+     *
+     * @param receiveUserName
+     * @return 根据收货人名字查询地址表
+     */
+    List<ReceiveAddress> getAddressesByReceiveUserName(String receiveUserName);
+
 }

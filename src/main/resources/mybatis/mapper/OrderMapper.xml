@@ -18,7 +18,7 @@
         <result column="orderEvaluate" property="orderEvaluate" jdbcType="VARCHAR" />
         <result column="takeUserId" property="takeUserId" jdbcType="INTEGER" />
     </resultMap>
-    
+
     <sql id="Base_Column_List" >
         orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId
     </sql>
@@ -134,5 +134,18 @@
         <include refid="Base_Column_List" />
         from orders
         where userId = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据字段orderName userId expressAdressName orderPay addTime模糊查询 -->
+    <select id="getOrdersByQuery" resultMap="BaseResultMap" parameterType="com.lhh.appservermaster.domain.query.OrderQuery">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM orders
+        where orderName like CONCAT('%',#{orderQuery.orderName,jdbcType=VARCHAR},'%')
+           or userId like CONCAT('%',#{orderQuery.userId,jdbcType=VARCHAR},'%')
+           or receiveAddressId like CONCAT('%',#{orderQuery.receiveAddressId,jdbcType=VARCHAR},'%')
+           or orderPay like CONCAT('%',#{orderQuery.orderPay,jdbcType=VARCHAR},'%')
+           or addTime like CONCAT('%',#{orderQuery.addTime,jdbcType=VARCHAR},'%')
+
     </select>
 </mapper>

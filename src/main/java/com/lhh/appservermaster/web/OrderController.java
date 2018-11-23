@@ -1,6 +1,7 @@
 package com.lhh.appservermaster.web;
 
 import com.lhh.appservermaster.domain.Order;
+import com.lhh.appservermaster.domain.query.OrderQuery;
 import com.lhh.appservermaster.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,4 +48,8 @@ public class OrderController {
         return orderService.deleteOrderByID(orderId);
     }
 
+    @GetMapping("/order/query")
+    public @ResponseBody List<Order> getOrdersByQuery(OrderQuery orderQuery){
+        return orderService.getOrdersByQuery(orderQuery);
+    }
 }

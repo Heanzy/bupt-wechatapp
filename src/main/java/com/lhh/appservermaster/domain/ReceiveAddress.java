@@ -6,29 +6,24 @@ public class ReceiveAddress implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer receiveId;
-    private String receiveName;
+    private String receiveName;  // 收货人名字
     private String receivePhone;
     private String receiveState;
-
+    private String receiveAddressName;
+    // TODO 根据收货人名字返回地址列表
     public ReceiveAddress() {
     }
 
-    public ReceiveAddress(Integer receiveId, String receiveName, String receivePhone, String receiveState) {
+    public ReceiveAddress(Integer receiveId, String receiveName, String receivePhone, String receiveState, String receiveAddressName) {
         this.receiveId = receiveId;
         this.receiveName = receiveName;
         this.receivePhone = receivePhone;
         this.receiveState = receiveState;
+        this.receiveAddressName = receiveAddressName;
     }
 
-
-    @Override
-    public String toString() {
-        return "ReceiveAddress{" +
-                "receiveId=" + receiveId +
-                ", receiveName='" + receiveName + '\'' +
-                ", receivePhone='" + receivePhone + '\'' +
-                ", receiveState='" + receiveState + '\'' +
-                '}';
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getReceiveId() {
@@ -47,6 +42,10 @@ public class ReceiveAddress implements Serializable {
         return receiveState;
     }
 
+    public String getReceiveAddressName() {
+        return receiveAddressName;
+    }
+
     public void setReceiveId(Integer receiveId) {
         this.receiveId = receiveId;
     }
@@ -61,5 +60,20 @@ public class ReceiveAddress implements Serializable {
 
     public void setReceiveState(String receiveState) {
         this.receiveState = receiveState;
+    }
+
+    public void setReceiveAddressName(String receiveAddressName) {
+        this.receiveAddressName = receiveAddressName;
+    }
+
+    @Override
+    public String toString() {
+        return "ReceiveAddress{" +
+                "receiveId=" + receiveId +
+                ", receiveName='" + receiveName + '\'' +
+                ", receivePhone='" + receivePhone + '\'' +
+                ", receiveState='" + receiveState + '\'' +
+                ", receiveAddressName='" + receiveAddressName + '\'' +
+                '}';
     }
 }

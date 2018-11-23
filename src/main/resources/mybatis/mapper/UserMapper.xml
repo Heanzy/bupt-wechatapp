@@ -107,4 +107,12 @@
         delete from users
         where userId = #{userId,jdbcType=INTEGER}
     </delete>
+
+    <!-- 根据用户名查询用户信息 -->
+    <select id="getUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from users
+        where userName = #{userName, jdbcType=VARCHAR}
+    </select>
 </mapper>
