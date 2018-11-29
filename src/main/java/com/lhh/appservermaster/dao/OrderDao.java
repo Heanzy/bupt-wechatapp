@@ -52,9 +52,18 @@ public interface OrderDao {
     boolean deleteOrderByID(@Param("orderId") Integer orderId);
 
     /**
-     * 根据字段orderName userId expressAdressName orderPay addTime模糊查询
+     * 模糊查询
      * @param orderQuery
      * @return 查询结果
      */
+
+    // TODO 测试
     List<Order> getOrdersByQuery(@Param("orderQuery") OrderQuery orderQuery);
+
+    /**
+     *
+     * @param takeUserId
+     * @return 根据代领人id查询订单
+     */
+    List<Order> getOrdersByTakeUserID(@Param("takeUserId") Integer takeUserId);
 }

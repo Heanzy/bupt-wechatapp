@@ -6,20 +6,31 @@ public class ReceiveAddress implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer receiveId;
-    private String receiveName;  // 收货人名字
+    private String receiveName;
     private String receivePhone;
     private String receiveState;
     private String receiveAddressName;
-    // TODO 根据收货人名字返回地址列表
+    private Integer userId;
+    // TODO 添加字段userId,并根据userId查询
+
     public ReceiveAddress() {
     }
 
-    public ReceiveAddress(Integer receiveId, String receiveName, String receivePhone, String receiveState, String receiveAddressName) {
+    public ReceiveAddress(Integer receiveId, String receiveName, String receivePhone, String receiveState, String receiveAddressName, Integer userId) {
         this.receiveId = receiveId;
         this.receiveName = receiveName;
         this.receivePhone = receivePhone;
         this.receiveState = receiveState;
         this.receiveAddressName = receiveAddressName;
+        this.userId = userId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public static long getSerialVersionUID() {

@@ -45,4 +45,9 @@ public class ReceiveAddressController {
     public List<ReceiveAddress> getAddressesByUserReceiveName(@RequestParam String receiveName){
         return receiveAddressService.getAddressesByReceiveUserName(receiveName);
     }
+
+    @GetMapping("receive-address/userId")
+    public List<ReceiveAddress> getAddressesByUserId(Integer userId){
+        return receiveAddressService.getAddressesByUserId(userId);
+    }
 }

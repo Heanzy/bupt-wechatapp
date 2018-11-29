@@ -129,6 +129,7 @@
         where orderId = #{orderId,jdbcType=INTEGER}
     </delete>
 
+    <!-- 根据用户id查询订单 -->
     <select id="getOrdersByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List" />
@@ -136,7 +137,7 @@
         where userId = #{userId,jdbcType=INTEGER}
     </select>
 
-    <!-- 根据字段orderName userId expressAdressName orderPay addTime模糊查询 -->
+    <!-- 模糊查询订单n -->
     <select id="getOrdersByQuery" resultMap="BaseResultMap" parameterType="com.lhh.appservermaster.domain.query.OrderQuery">
         SELECT
         <include refid="Base_Column_List" />
@@ -146,6 +147,23 @@
            or receiveAddressId like CONCAT('%',#{orderQuery.receiveAddressId,jdbcType=VARCHAR},'%')
            or orderPay like CONCAT('%',#{orderQuery.orderPay,jdbcType=VARCHAR},'%')
            or addTime like CONCAT('%',#{orderQuery.addTime,jdbcType=VARCHAR},'%')
+           or takeUserId like CONCAT('%',#{orderQuery.takeUserId,jdbcType=VARCHAR},'%')
+           or orderState like CONCAT('%',#{orderQuery.orderState,jdbcType=VARCHAR},'%')
 
+           or expressCompanyName like CONCAT('%',#{orderQuery.expressCompanyName,jdbcType=VARCHAR},'%')
+           or expressCompanyAddress like CONCAT('%',#{orderQuery.expressCompanyAddress,jdbcType=VARCHAR},'%')
+           or remark like CONCAT('%',#{orderQuery.remark,jdbcType=VARCHAR},'%')
+           or receiveCode like CONCAT('%',#{orderQuery.receiveCode,jdbcType=VARCHAR},'%')
+           or userPhone like CONCAT('%',#{orderQuery.userPhone,jdbcType=VARCHAR},'%')
+           or orderEvaluate like CONCAT('%',#{orderQuery.orderEvaluate,jdbcType=VARCHAR},'%')
+
+    </select>
+
+    <!-- 根据代领人id查询订单 -->
+    <select id="getOrdersByTakeUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List" />
+        from orders
+        where takeUserId = #{takeUserId,jdbcType=INTEGER}
     </select>
 </mapper>

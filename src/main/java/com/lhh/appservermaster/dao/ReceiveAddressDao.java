@@ -50,4 +50,10 @@ public interface ReceiveAddressDao {
      */
     List<ReceiveAddress> getAddressesByReceiveUserName(@Param("receiveName")String receiveName);
 
+    /**
+     *
+     * @param userId
+     * @return 根据用户id返回收货地址信息
+     */
+    List<ReceiveAddress> getAddressesByUserId(@Param("userId") Integer userId);
 }

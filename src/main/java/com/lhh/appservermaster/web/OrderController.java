@@ -52,4 +52,9 @@ public class OrderController {
     public @ResponseBody List<Order> getOrdersByQuery(OrderQuery orderQuery){
         return orderService.getOrdersByQuery(orderQuery);
     }
+
+    @GetMapping("/order/takeUserId")
+    public @ResponseBody List<Order> getOrdersByTakeUserID(@RequestParam Integer takeUserId){
+        return orderService.getOrdersByTakeUserID(takeUserId);
+    }
 }

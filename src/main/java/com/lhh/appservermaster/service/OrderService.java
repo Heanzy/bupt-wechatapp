@@ -49,9 +49,16 @@ public interface OrderService {
     boolean deleteOrderByID(Integer orderID);
 
     /**
-     * 根据字段orderName userId expressAdressName orderPay addTime模糊查询
+     * 模糊查询订单
      * @param orderQuery
      * @return 查询结果
      */
     List<Order> getOrdersByQuery(OrderQuery orderQuery);
+
+    /**
+     * 根据代领人id查询订单
+     * @param takeUserId
+     * @return
+     */
+    List<Order> getOrdersByTakeUserID(Integer takeUserId);
 }

@@ -47,4 +47,10 @@ public interface ReceiveAddressService {
      */
     List<ReceiveAddress> getAddressesByReceiveUserName(String receiveUserName);
 
+    /**
+     *
+     * @param userId
+     * @return 根据用户id返回地址信息列表
+     */
+    List<ReceiveAddress> getAddressesByUserId(Integer userId);
 }

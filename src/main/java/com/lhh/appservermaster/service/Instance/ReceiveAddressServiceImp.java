@@ -16,6 +16,11 @@ public class ReceiveAddressServiceImp implements ReceiveAddressService {
     private ReceiveAddressDao receiveAddressDao;
 
     @Override
+    public List<ReceiveAddress> getAddressesByUserId(Integer userId) {
+        return receiveAddressDao.getAddressesByUserId(userId);
+    }
+
+    @Override
     public List<ReceiveAddress> getAddressesByReceiveUserName(String receiveUserName) {
         return receiveAddressDao.getAddressesByReceiveUserName(receiveUserName);
     }

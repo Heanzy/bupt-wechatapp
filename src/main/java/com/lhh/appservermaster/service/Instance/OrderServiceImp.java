@@ -14,6 +14,10 @@ public class OrderServiceImp implements OrderService {
     @Autowired
     private OrderDao orderDao;
 
+    @Override
+    public List<Order> getOrdersByTakeUserID(Integer takeUserId) {
+        return orderDao.getOrdersByTakeUserID(takeUserId);
+    }
 
     @Override
     public List<Order> getAllOrders() {
