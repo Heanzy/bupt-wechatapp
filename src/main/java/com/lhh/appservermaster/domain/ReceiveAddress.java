@@ -11,7 +11,6 @@ public class ReceiveAddress implements Serializable {
     private String receiveState;
     private String receiveAddressName;
     private Integer userId;
-    // TODO 添加字段userId,并根据userId查询
 
     public ReceiveAddress() {
     }

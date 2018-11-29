@@ -56,8 +56,6 @@ public interface OrderDao {
      * @param orderQuery
      * @return 查询结果
      */
-
-    // TODO 测试
     List<Order> getOrdersByQuery(@Param("orderQuery") OrderQuery orderQuery);
 
     /**

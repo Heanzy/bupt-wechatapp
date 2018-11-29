@@ -66,7 +66,7 @@
                 receiveAddressName = #{receiveAddress.receiveAddressName,jdbcType=VARCHAR},
             </if>
             <if test = "receiveAddress.userId != null">
-                receiveAddressName = #{receiveAddress.userId,jdbcType=VARCHAR},
+                receiveAddressName = #{receiveAddress.userId,jdbcType=INTEGER},
             </if>
 
         </set>
