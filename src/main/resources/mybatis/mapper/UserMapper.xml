@@ -15,10 +15,12 @@
         <result column="userMoney" property="userMoney" jdbcType="VARCHAR" />
         <result column="userAuthFile" property="userAuthFile" jdbcType="VARCHAR" />
         <result column="regTime" property="regTime" jdbcType="VARCHAR" />
+        <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+        <result column="studentId" property="studentId" jdbcType="INTEGER" />
     </resultMap>
     
     <sql id="Base_Column_List" >
-        userId, userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime
+        userId, userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime, nickName, studentId
     </sql>
 
     <!-- 获取所有用户信息 -->
@@ -32,11 +34,10 @@
     <insert id="addUser" parameterType="com.lhh.appservermaster.domain.User">
         insert into users
         (
-          userId, userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime
+          userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime, nickName, studentId
         )
         VALUES
         (
-          #{user.userId,jdbcType=INTEGER},
           #{user.userName,jdbcType=VARCHAR},
           #{user.userPassword,jdbcType=VARCHAR},
           #{user.userPhoto,jdbcType=VARCHAR},
@@ -47,7 +48,9 @@
           #{user.userReputation,jdbcType=INTEGER},
           #{user.userMoney,jdbcType=VARCHAR},
           #{user.userAuthFile,jdbcType=VARCHAR},
-          #{user.regTime,jdbcType=VARCHAR}
+          #{user.regTime,jdbcType=VARCHAR},
+          #{user.nickName,jdbcType=VARCHAR},
+          #{user.studentId,jdbcType=INTEGER}
         )
 
     </insert>
@@ -98,6 +101,12 @@
             <if test = "user.regTime != null">
                 regTime = #{user.regTime,jdbcType=VARCHAR},
             </if>
+            <if test = "user.nickName != null">
+                regTime = #{user.nickName,jdbcType=VARCHAR},
+            </if>
+            <if test = "user.studentId != null">
+                studentId = #{user.studentId,jdbcType=INTEGER},
+            </if>
         </set>
         where userId = #{user.userId,jdbcType=INTEGER}
     </update>
@@ -114,5 +123,13 @@
         <include refid="Base_Column_List" />
         from users
         where userName = #{userName, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据昵称查询用户信息 -->
+    <select id="getUserByNickName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from users
+        where nickName = #{nickName, jdbcType=VARCHAR}
     </select>
 </mapper>

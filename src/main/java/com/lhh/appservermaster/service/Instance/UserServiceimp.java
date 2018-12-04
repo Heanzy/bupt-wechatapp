@@ -18,6 +18,11 @@ public class UserServiceimp implements UserService {
     private UserDao userDao;
 
     @Override
+    public User getUserByNickName(String nickName) {
+        return userDao.getUserByNickName(nickName);
+    }
+
+    @Override
     public boolean userSingup(User user) {
         return userDao.addUser(user);
     }

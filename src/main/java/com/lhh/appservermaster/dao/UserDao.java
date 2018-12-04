@@ -47,4 +47,11 @@ public interface UserDao {
      * @return 根据用户名查询用户信息
      */
     User getUserByName(@Param("userName") String userName);
+
+    /**
+     *
+     * @param nickName
+     * @return 根据昵称查询用户信息
+     */
+    User getUserByNickName(@Param("nickName") String nickName);
 }

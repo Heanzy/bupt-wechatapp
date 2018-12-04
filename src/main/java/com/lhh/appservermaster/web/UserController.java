@@ -12,6 +12,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
+    // TODO 改进至配置文件
     // private String location = "D:\\app-server\\user-images";
     private String remote = "/home/app-server/user-images";
 
@@ -56,5 +57,10 @@ public class UserController {
     @GetMapping("/user/userName")
     public @ResponseBody User getUserByName(@RequestParam("userName") String userName){
         return userService.getUserByName(userName);
+    }
+
+    @GetMapping("/user/nickName")
+    public @ResponseBody User getUserByNickName(@RequestParam("nickName") String nickName){
+        return userService.getUserByNickName(nickName);
     }
 }

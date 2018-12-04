@@ -51,5 +51,11 @@ public interface UserService {
      */
     User getUserByName(String userName);
 
+    /**
+     * 根据昵称查询用户信息
+     * @param nickName
+     * @return 用户信息
+     */
+    User getUserByNickName(String nickName);
 }
 
