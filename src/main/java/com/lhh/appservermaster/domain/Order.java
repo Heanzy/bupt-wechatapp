@@ -15,16 +15,19 @@ public class Order implements Serializable {
     private String orderState;
     private String orderPay;
     private String remark;
-    private Integer receiveCode;
+    private String receiveCode;
     private String userPhone;
     private String orderEvaluate;
     private Integer takeUserId;
 
+    // TODO 新增两个字段 receiveCode 为String
+    private String score;
+    private String orderType;
 
     public Order() {
     }
 
-    public Order(Integer orderId, String orderName, Integer userId, String expressCompanyName, String expressCompanyAddress, Integer receiveAddressId, String addTime, String orderState, String orderPay, String remark, Integer receiveCode, String userPhone, String orderEvaluate, Integer takeUserId) {
+    public Order(Integer orderId, String orderName, Integer userId, String expressCompanyName, String expressCompanyAddress, Integer receiveAddressId, String addTime, String orderState, String orderPay, String remark, String receiveCode, String userPhone, String orderEvaluate, Integer takeUserId, String score, String orderType) {
         this.orderId = orderId;
         this.orderName = orderName;
         this.userId = userId;
@@ -39,6 +42,8 @@ public class Order implements Serializable {
         this.userPhone = userPhone;
         this.orderEvaluate = orderEvaluate;
         this.takeUserId = takeUserId;
+        this.score = score;
+        this.orderType = orderType;
     }
 
     @Override
@@ -52,124 +57,146 @@ public class Order implements Serializable {
                 ", receiveAddressId=" + receiveAddressId +
                 ", addTime='" + addTime + '\'' +
                 ", orderState='" + orderState + '\'' +
-                ", orderPay=" + orderPay +
+                ", orderPay='" + orderPay + '\'' +
                 ", remark='" + remark + '\'' +
-                ", receiveCode=" + receiveCode +
+                ", receiveCode='" + receiveCode + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", orderEvaluate='" + orderEvaluate + '\'' +
                 ", takeUserId=" + takeUserId +
+                ", score='" + score + '\'' +
+                ", orderType='" + orderType + '\'' +
                 '}';
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public void setExpressCompanyName(String expressCompanyName) {
-        this.expressCompanyName = expressCompanyName;
-    }
-
-    public void setExpressCompanyAddress(String expressCompanyAddress) {
-        this.expressCompanyAddress = expressCompanyAddress;
-    }
-
-    public void setReceiveAddressId(Integer receiveAddressId) {
-        this.receiveAddressId = receiveAddressId;
-    }
-
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
-    }
-
-    public void setOrderState(String orderState) {
-        this.orderState = orderState;
-    }
-
-    public void setOrderPay(String orderPay) {
-        this.orderPay = orderPay;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public void setReceiveCode(Integer receiveCode) {
-        this.receiveCode = receiveCode;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
-
-    public void setOrderEvaluate(String orderEvaluate) {
-        this.orderEvaluate = orderEvaluate;
-    }
-
-    public void setTakeUserId(Integer takeUserId) {
-        this.takeUserId = takeUserId;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getOrderId() {
         return orderId;
     }
 
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
     public String getOrderName() {
         return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
     }
 
     public Integer getUserId() {
         return userId;
     }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public String getExpressCompanyName() {
         return expressCompanyName;
+    }
+
+    public void setExpressCompanyName(String expressCompanyName) {
+        this.expressCompanyName = expressCompanyName;
     }
 
     public String getExpressCompanyAddress() {
         return expressCompanyAddress;
     }
 
+    public void setExpressCompanyAddress(String expressCompanyAddress) {
+        this.expressCompanyAddress = expressCompanyAddress;
+    }
+
     public Integer getReceiveAddressId() {
         return receiveAddressId;
+    }
+
+    public void setReceiveAddressId(Integer receiveAddressId) {
+        this.receiveAddressId = receiveAddressId;
     }
 
     public String getAddTime() {
         return addTime;
     }
 
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
+
     public String getOrderState() {
         return orderState;
+    }
+
+    public void setOrderState(String orderState) {
+        this.orderState = orderState;
     }
 
     public String getOrderPay() {
         return orderPay;
     }
 
+    public void setOrderPay(String orderPay) {
+        this.orderPay = orderPay;
+    }
+
     public String getRemark() {
         return remark;
     }
 
-    public Integer getReceiveCode() {
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getReceiveCode() {
         return receiveCode;
+    }
+
+    public void setReceiveCode(String receiveCode) {
+        this.receiveCode = receiveCode;
     }
 
     public String getUserPhone() {
         return userPhone;
     }
 
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
     public String getOrderEvaluate() {
         return orderEvaluate;
     }
 
+    public void setOrderEvaluate(String orderEvaluate) {
+        this.orderEvaluate = orderEvaluate;
+    }
+
     public Integer getTakeUserId() {
         return takeUserId;
+    }
+
+    public void setTakeUserId(Integer takeUserId) {
+        this.takeUserId = takeUserId;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 }

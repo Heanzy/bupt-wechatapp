@@ -13,14 +13,16 @@
         <result column="orderState" property="orderState" jdbcType="VARCHAR" />
         <result column="orderPay" property="orderPay" jdbcType="VARCHAR" />
         <result column="remark" property="remark" jdbcType="VARCHAR" />
-        <result column="receiveCode" property="receiveCode" jdbcType="INTEGER" />
+        <result column="receiveCode" property="receiveCode" jdbcType="VARCHAR" />
         <result column="userPhone" property="userPhone" jdbcType="VARCHAR" />
         <result column="orderEvaluate" property="orderEvaluate" jdbcType="VARCHAR" />
         <result column="takeUserId" property="takeUserId" jdbcType="INTEGER" />
+        <result column="score" property="score" jdbcType="VARCHAR" />
+        <result column="orderType" property="orderType" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
-        orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId
+        orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType
     </sql>
 
     <!-- 获取所有订单信息 -->
@@ -34,7 +36,7 @@
     <insert id="addOrder" parameterType="com.lhh.appservermaster.domain.Order">
         insert into orders
         (
-          orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId
+          orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType
         )
         VALUES
         (
@@ -50,7 +52,9 @@
           #{order.receiveCode,jdbcType=VARCHAR},
           #{order.userPhone,jdbcType=VARCHAR},
           #{order.orderEvaluate,jdbcType=VARCHAR},
-          #{order.takeUserId,jdbcType=INTEGER}
+          #{order.takeUserId,jdbcType=INTEGER},
+          #{order.score,jdbcType=VARCHAR},
+          #{order.orderType,jdbcType=VARCHAR}
         )
 
     </insert>
@@ -104,7 +108,7 @@
             </if>
 
             <if test = "order.receiveCode != null">
-                receiveCode = #{order.receiveCode,jdbcType=INTEGER},
+                receiveCode = #{order.receiveCode,jdbcType=VARCHAR},
             </if>
 
             <if test = "order.userPhone != null">
@@ -117,6 +121,14 @@
 
             <if test = "order.takeUserId != null">
                 takeUserId = #{order.takeUserId,jdbcType=INTEGER},
+            </if>
+
+            <if test = "order.score != null">
+                score = #{order.score,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.orderType != null">
+                orderType = #{order.orderType,jdbcType=VARCHAR},
             </if>
 
         </set>
