@@ -61,4 +61,12 @@ public interface OrderService {
      * @return
      */
     List<Order> getOrdersByTakeUserID(Integer takeUserId);
+
+    /**
+     * 根据订单状态查询
+     * @param orderState
+     * @return
+     */
+    List<Order> getOrdersByorderState(String orderState);
+
 }

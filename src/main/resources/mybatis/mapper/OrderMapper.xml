@@ -178,4 +178,13 @@
         from orders
         where takeUserId = #{takeUserId,jdbcType=INTEGER}
     </select>
+
+    <!-- 根据订单状态查询 -->
+    <select id="getOrdersByOrderState" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from orders
+        where orderState = #{orderState,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

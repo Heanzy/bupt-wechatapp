@@ -57,4 +57,9 @@ public class OrderController {
     public @ResponseBody List<Order> getOrdersByTakeUserID(@RequestParam Integer takeUserId){
         return orderService.getOrdersByTakeUserID(takeUserId);
     }
+
+    @GetMapping("/order/orderState")
+    public @ResponseBody List<Order> getOrdersByOrderState(@RequestParam String orderState){
+        return orderService.getOrdersByorderState(orderState);
+    }
 }

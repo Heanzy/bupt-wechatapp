@@ -64,4 +64,11 @@ public interface OrderDao {
      * @return 根据代领人id查询订单
      */
     List<Order> getOrdersByTakeUserID(@Param("takeUserId") Integer takeUserId);
+
+    /**
+     * 根据订单状态查询
+     * @param orderState
+     * @return
+     */
+    List<Order> getOrdersByOrderState(@Param("orderState") String orderState);
 }

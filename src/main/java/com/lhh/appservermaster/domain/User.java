@@ -17,14 +17,15 @@ public class User implements Serializable {
     private String userMoney;
     private String userAuthFile;
     private String regTime;
-    // TODO 用户表添加字段 studentId nickName
     private String nickName; // 昵称
     private Integer studentId; // 学号
+
+    private String userAuthState;
 
     public User() {
     }
 
-    public User(Integer userId, String userName, String userPassword, String userPhoto, String userType, String userPhone, String userGender, String userEmail, Integer userReputation, String userMoney, String userAuthFile, String regTime, String nickName, Integer studentId) {
+    public User(Integer userId, String userName, String userPassword, String userPhoto, String userType, String userPhone, String userGender, String userEmail, Integer userReputation, String userMoney, String userAuthFile, String regTime, String nickName, Integer studentId, String userAuthState) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -39,10 +40,28 @@ public class User implements Serializable {
         this.regTime = regTime;
         this.nickName = nickName;
         this.studentId = studentId;
+        this.userAuthState = userAuthState;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userPhoto='" + userPhoto + '\'' +
+                ", userType='" + userType + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userGender='" + userGender + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userReputation=" + userReputation +
+                ", userMoney='" + userMoney + '\'' +
+                ", userAuthFile='" + userAuthFile + '\'' +
+                ", regTime='" + regTime + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", studentId=" + studentId +
+                ", userAuthState='" + userAuthState + '\'' +
+                '}';
     }
 
     public Integer getUserId() {
@@ -157,23 +176,11 @@ public class User implements Serializable {
         this.studentId = studentId;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userPhoto='" + userPhoto + '\'' +
-                ", userType='" + userType + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", userGender='" + userGender + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userReputation=" + userReputation +
-                ", userMoney='" + userMoney + '\'' +
-                ", userAuthFile='" + userAuthFile + '\'' +
-                ", regTime='" + regTime + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", studentId=" + studentId +
-                '}';
+    public String getUserAuthState() {
+        return userAuthState;
+    }
+
+    public void setUserAuthState(String userAuthState) {
+        this.userAuthState = userAuthState;
     }
 }
