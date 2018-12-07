@@ -71,4 +71,11 @@ public interface OrderDao {
      * @return
      */
     List<Order> getOrdersByOrderState(@Param("orderState") String orderState);
+
+    /**
+     * 根据订单类型查询
+     * @param orderType
+     * @return
+     */
+    List<Order> getOrdersByOrderType(@Param("orderType") String orderType);
 }

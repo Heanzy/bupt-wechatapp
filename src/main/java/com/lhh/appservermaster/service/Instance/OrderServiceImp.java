@@ -4,9 +4,12 @@ import com.lhh.appservermaster.dao.OrderDao;
 import com.lhh.appservermaster.domain.Order;
 import com.lhh.appservermaster.domain.query.OrderQuery;
 import com.lhh.appservermaster.service.OrderService;
+import com.lhh.appservermaster.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Component
@@ -15,7 +18,24 @@ public class OrderServiceImp implements OrderService {
     private OrderDao orderDao;
 
     @Override
-    public List<Order> getOrdersByorderState(String orderState) {
+    public List<Order> getOrdersByOrderType(String orderType) {
+        return orderDao.getOrdersByOrderType(orderType);
+    }
+
+    @Override
+    public String saveOrderPic(MultipartFile multipartFile, String path) {
+        String picRename = null;
+        try {
+            picRename = Utils.getInstance().saveImg(multipartFile,path);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return picRename;
+    }
+
+    @Override
+    public List<Order> getOrdersByOrderState(String orderState) {
         return orderDao.getOrdersByOrderState(orderState);
     }
 

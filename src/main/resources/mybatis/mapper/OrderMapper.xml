@@ -19,10 +19,11 @@
         <result column="takeUserId" property="takeUserId" jdbcType="INTEGER" />
         <result column="score" property="score" jdbcType="VARCHAR" />
         <result column="orderType" property="orderType" jdbcType="VARCHAR" />
+        <result column="orderPic" property="orderPic" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
-        orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType
+        orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType, orderPic
     </sql>
 
     <!-- 获取所有订单信息 -->
@@ -36,7 +37,7 @@
     <insert id="addOrder" parameterType="com.lhh.appservermaster.domain.Order">
         insert into orders
         (
-          orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType
+          orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType, orderPic
         )
         VALUES
         (
@@ -54,7 +55,8 @@
           #{order.orderEvaluate,jdbcType=VARCHAR},
           #{order.takeUserId,jdbcType=INTEGER},
           #{order.score,jdbcType=VARCHAR},
-          #{order.orderType,jdbcType=VARCHAR}
+          #{order.orderType,jdbcType=VARCHAR},
+          #{order.orderPic,jdbcType=VARCHAR}
         )
 
     </insert>
@@ -131,6 +133,10 @@
                 orderType = #{order.orderType,jdbcType=VARCHAR},
             </if>
 
+            <if test = "order.orderPic != null">
+                orderPic = #{order.orderPic,jdbcType=VARCHAR},
+            </if>
+
         </set>
         where orderId = #{order.orderId,jdbcType=INTEGER}
     </update>
@@ -185,6 +191,14 @@
         <include refid="Base_Column_List" />
         from orders
         where orderState = #{orderState,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据订单类型查询 -->
+    <select id="getOrdersByOrderType" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from orders
+        where orderType = #{orderType,jdbcType=VARCHAR}
     </select>
 
 </mapper>

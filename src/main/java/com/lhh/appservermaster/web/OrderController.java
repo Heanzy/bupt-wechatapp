@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Controller
 public class OrderController {
+    private String remote = "/home/app-server/order-images";
+
     @Autowired
     private OrderService orderService;
 
@@ -60,6 +63,20 @@ public class OrderController {
 
     @GetMapping("/order/orderState")
     public @ResponseBody List<Order> getOrdersByOrderState(@RequestParam String orderState){
-        return orderService.getOrdersByorderState(orderState);
+        return orderService.getOrdersByOrderState(orderState);
+    }
+
+    @PostMapping("/order/img/upload")
+    public @ResponseBody String uploadOrderPic(@RequestParam("image") MultipartFile multipartFile){
+        if (multipartFile.isEmpty()) {
+            return "failed";
+        }
+        String picRename = orderService.saveOrderPic(multipartFile,remote);
+        return picRename;
+    }
+
+    @GetMapping("/order/orderType")
+    public @ResponseBody List<Order> getOrdersByOrderType(@RequestParam String orderType){
+        return orderService.getOrdersByOrderType(orderType);
     }
 }

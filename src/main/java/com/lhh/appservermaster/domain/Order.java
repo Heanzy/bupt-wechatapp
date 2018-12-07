@@ -19,15 +19,15 @@ public class Order implements Serializable {
     private String userPhone;
     private String orderEvaluate;
     private Integer takeUserId;
-
-    // TODO 新增两个字段 receiveCode 为String
     private String score;
     private String orderType;
+    // TODO 新增字段用于添加图片
+    private String orderPic;
 
     public Order() {
     }
 
-    public Order(Integer orderId, String orderName, Integer userId, String expressCompanyName, String expressCompanyAddress, Integer receiveAddressId, String addTime, String orderState, String orderPay, String remark, String receiveCode, String userPhone, String orderEvaluate, Integer takeUserId, String score, String orderType) {
+    public Order(Integer orderId, String orderName, Integer userId, String expressCompanyName, String expressCompanyAddress, Integer receiveAddressId, String addTime, String orderState, String orderPay, String remark, String receiveCode, String userPhone, String orderEvaluate, Integer takeUserId, String score, String orderType, String orderPic) {
         this.orderId = orderId;
         this.orderName = orderName;
         this.userId = userId;
@@ -44,6 +44,7 @@ public class Order implements Serializable {
         this.takeUserId = takeUserId;
         this.score = score;
         this.orderType = orderType;
+        this.orderPic = orderPic;
     }
 
     @Override
@@ -65,6 +66,7 @@ public class Order implements Serializable {
                 ", takeUserId=" + takeUserId +
                 ", score='" + score + '\'' +
                 ", orderType='" + orderType + '\'' +
+                ", orderPic='" + orderPic + '\'' +
                 '}';
     }
 
@@ -198,5 +200,13 @@ public class Order implements Serializable {
 
     public void setOrderType(String orderType) {
         this.orderType = orderType;
+    }
+
+    public String getOrderPic() {
+        return orderPic;
+    }
+
+    public void setOrderPic(String orderPic) {
+        this.orderPic = orderPic;
     }
 }
