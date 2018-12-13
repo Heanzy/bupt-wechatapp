@@ -53,7 +53,7 @@
           #{user.regTime,jdbcType=VARCHAR},
           #{user.nickName,jdbcType=VARCHAR},
           #{user.studentId,jdbcType=INTEGER},
-          #{user.userAuthState,jdbcType=VARCHAR}
+          #{user.userAuthState,jdbcType=VARCHAR},
           #{user.payPwd,jdbcType=VARCHAR}
         )
 
@@ -117,7 +117,7 @@
             </if>
 
             <if test = "user.payPwd != null">
-                userAuthState = #{user.payPwd,jdbcType=VARCHAR},
+                payPwd = #{user.payPwd,jdbcType=VARCHAR},
             </if>
         </set>
         where userId = #{user.userId,jdbcType=INTEGER}

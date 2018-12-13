@@ -20,10 +20,16 @@
         <result column="score" property="score" jdbcType="VARCHAR" />
         <result column="orderType" property="orderType" jdbcType="VARCHAR" />
         <result column="orderPic" property="orderPic" jdbcType="VARCHAR" />
+
+        <result column="receiveName" property="receiveName" jdbcType="VARCHAR" />
+        <result column="receivePhone" property="receivePhone" jdbcType="VARCHAR" />
+        <result column="receiveState" property="receiveState" jdbcType="VARCHAR" />
+        <result column="receiveAddressName" property="receiveAddressName" jdbcType="VARCHAR" />
+
     </resultMap>
 
     <sql id="Base_Column_List" >
-        orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType, orderPic
+        orderId, orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType, orderPic, receiveName, receivePhone, receiveState, receiveAddressName
     </sql>
 
     <!-- 获取所有订单信息 -->
@@ -37,7 +43,7 @@
     <insert id="addOrder" parameterType="com.lhh.appservermaster.domain.Order">
         insert into orders
         (
-          orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType, orderPic
+          orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType, orderPic, receiveName, receivePhone, receiveState, receiveAddressName
         )
         VALUES
         (
@@ -56,7 +62,11 @@
           #{order.takeUserId,jdbcType=INTEGER},
           #{order.score,jdbcType=VARCHAR},
           #{order.orderType,jdbcType=VARCHAR},
-          #{order.orderPic,jdbcType=VARCHAR}
+          #{order.orderPic,jdbcType=VARCHAR},
+          #{order.receiveName,jdbcType=VARCHAR},
+          #{order.receivePhone,jdbcType=VARCHAR},
+          #{order.receiveState,jdbcType=VARCHAR},
+          #{order.receiveAddressName,jdbcType=VARCHAR}
         )
 
     </insert>
@@ -135,6 +145,19 @@
 
             <if test = "order.orderPic != null">
                 orderPic = #{order.orderPic,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "order.receiveName != null">
+                receiveName = #{order.receiveName,jdbcType=VARCHAR},
+            </if>
+            <if test = "order.receivePhone != null">
+                receivePhone = #{order.receivePhone,jdbcType=VARCHAR},
+            </if>
+            <if test = "order.receiveState != null">
+                receiveState = #{order.receiveState,jdbcType=VARCHAR},
+            </if>
+            <if test = "order.receiveAddressName != null">
+                receiveAddressName = #{order.receiveAddressName,jdbcType=VARCHAR},
             </if>
 
         </set>

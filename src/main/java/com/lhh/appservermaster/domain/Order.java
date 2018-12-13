@@ -24,10 +24,15 @@ public class Order implements Serializable {
     private String orderPic;
 
     // TODO 把地址的字段添加到订单
+    private String receiveName;
+    private String receivePhone;
+    private String receiveState;
+    private String receiveAddressName;
+
     public Order() {
     }
 
-    public Order(Integer orderId, String orderName, Integer userId, String expressCompanyName, String expressCompanyAddress, Integer receiveAddressId, String addTime, String orderState, String orderPay, String remark, String receiveCode, String userPhone, String orderEvaluate, Integer takeUserId, String score, String orderType, String orderPic) {
+    public Order(Integer orderId, String orderName, Integer userId, String expressCompanyName, String expressCompanyAddress, Integer receiveAddressId, String addTime, String orderState, String orderPay, String remark, String receiveCode, String userPhone, String orderEvaluate, Integer takeUserId, String score, String orderType, String orderPic, String receiveName, String receivePhone, String receiveState, String receiveAddressName) {
         this.orderId = orderId;
         this.orderName = orderName;
         this.userId = userId;
@@ -45,6 +50,10 @@ public class Order implements Serializable {
         this.score = score;
         this.orderType = orderType;
         this.orderPic = orderPic;
+        this.receiveName = receiveName;
+        this.receivePhone = receivePhone;
+        this.receiveState = receiveState;
+        this.receiveAddressName = receiveAddressName;
     }
 
     @Override
@@ -67,6 +76,10 @@ public class Order implements Serializable {
                 ", score='" + score + '\'' +
                 ", orderType='" + orderType + '\'' +
                 ", orderPic='" + orderPic + '\'' +
+                ", receiveName='" + receiveName + '\'' +
+                ", receivePhone='" + receivePhone + '\'' +
+                ", receiveState='" + receiveState + '\'' +
+                ", receiveAddressName='" + receiveAddressName + '\'' +
                 '}';
     }
 
@@ -208,5 +221,37 @@ public class Order implements Serializable {
 
     public void setOrderPic(String orderPic) {
         this.orderPic = orderPic;
+    }
+
+    public String getReceiveName() {
+        return receiveName;
+    }
+
+    public void setReceiveName(String receiveName) {
+        this.receiveName = receiveName;
+    }
+
+    public String getReceivePhone() {
+        return receivePhone;
+    }
+
+    public void setReceivePhone(String receivePhone) {
+        this.receivePhone = receivePhone;
+    }
+
+    public String getReceiveState() {
+        return receiveState;
+    }
+
+    public void setReceiveState(String receiveState) {
+        this.receiveState = receiveState;
+    }
+
+    public String getReceiveAddressName() {
+        return receiveAddressName;
+    }
+
+    public void setReceiveAddressName(String receiveAddressName) {
+        this.receiveAddressName = receiveAddressName;
     }
 }
