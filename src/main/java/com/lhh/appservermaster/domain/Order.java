@@ -21,9 +21,9 @@ public class Order implements Serializable {
     private Integer takeUserId;
     private String score;
     private String orderType;
-    // TODO 新增字段用于添加图片
     private String orderPic;
 
+    // TODO 把地址的字段添加到订单
     public Order() {
     }
 

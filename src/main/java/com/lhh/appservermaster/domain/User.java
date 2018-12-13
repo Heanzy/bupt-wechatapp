@@ -21,11 +21,13 @@ public class User implements Serializable {
     private Integer studentId; // 学号
 
     private String userAuthState;
+    // TODO 添加字段payPwd
+    private String payPwd;
 
     public User() {
     }
 
-    public User(Integer userId, String userName, String userPassword, String userPhoto, String userType, String userPhone, String userGender, String userEmail, Integer userReputation, String userMoney, String userAuthFile, String regTime, String nickName, Integer studentId, String userAuthState) {
+    public User(Integer userId, String userName, String userPassword, String userPhoto, String userType, String userPhone, String userGender, String userEmail, Integer userReputation, String userMoney, String userAuthFile, String regTime, String nickName, Integer studentId, String userAuthState, String payPwd) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -41,6 +43,7 @@ public class User implements Serializable {
         this.nickName = nickName;
         this.studentId = studentId;
         this.userAuthState = userAuthState;
+        this.payPwd = payPwd;
     }
 
     @Override
@@ -61,7 +64,12 @@ public class User implements Serializable {
                 ", nickName='" + nickName + '\'' +
                 ", studentId=" + studentId +
                 ", userAuthState='" + userAuthState + '\'' +
+                ", payPwd='" + payPwd + '\'' +
                 '}';
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getUserId() {
@@ -182,5 +190,13 @@ public class User implements Serializable {
 
     public void setUserAuthState(String userAuthState) {
         this.userAuthState = userAuthState;
+    }
+
+    public String getPayPwd() {
+        return payPwd;
+    }
+
+    public void setPayPwd(String payPwd) {
+        this.payPwd = payPwd;
     }
 }

@@ -18,10 +18,11 @@
         <result column="nickName" property="nickName" jdbcType="VARCHAR" />
         <result column="studentId" property="studentId" jdbcType="INTEGER" />
         <result column="userAuthState" property="userAuthState" jdbcType="VARCHAR" />
+        <result column="payPwd" property="payPwd" jdbcType="VARCHAR" />
     </resultMap>
     
     <sql id="Base_Column_List" >
-        userId, userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime, nickName, studentId, userAuthState
+        userId, userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime, nickName, studentId, userAuthState, payPwd
     </sql>
 
     <!-- 获取所有用户信息 -->
@@ -35,7 +36,7 @@
     <insert id="addUser" parameterType="com.lhh.appservermaster.domain.User">
         insert into users
         (
-          userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime, nickName, studentId, userAuthState
+          userName, userPassword, userPhoto, userType, userPhone, userGender, userEmail, userReputation, userMoney, userAuthFile, regTime, nickName, studentId, userAuthState, payPwd
         )
         VALUES
         (
@@ -53,6 +54,7 @@
           #{user.nickName,jdbcType=VARCHAR},
           #{user.studentId,jdbcType=INTEGER},
           #{user.userAuthState,jdbcType=VARCHAR}
+          #{user.payPwd,jdbcType=VARCHAR}
         )
 
     </insert>
@@ -112,6 +114,10 @@
 
             <if test = "user.userAuthState != null">
                 userAuthState = #{user.userAuthState,jdbcType=VARCHAR},
+            </if>
+
+            <if test = "user.payPwd != null">
+                userAuthState = #{user.payPwd,jdbcType=VARCHAR},
             </if>
         </set>
         where userId = #{user.userId,jdbcType=INTEGER}
