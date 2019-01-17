@@ -1,6 +1,7 @@
 package com.buptcc.wechatapp.service.Instance;
 
 import com.buptcc.wechatapp.dao.CounterDao;
+import com.buptcc.wechatapp.domain.Counter;
 import com.buptcc.wechatapp.service.CreateBagPatternService;
 import com.buptcc.wechatapp.utils.Lab2Rgb;
 import com.jmatio.io.MatFileReader;
@@ -23,8 +24,8 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
         long startTime=System.currentTimeMillis();
         try {
             System.load("E:\\opencv-4.0.1\\opencv\\build\\java\\x64\\opencv_java401.dll");
-            MatFileReader matFileReaderTarget = new MatFileReader("src/Resource/"+pName+".mat");
-            MatFileReader matFileReaderColorSyle = new MatFileReader("src/Resource/"+cName+".mat");
+            MatFileReader matFileReaderTarget = new MatFileReader("F:/Mini/data/"+pName+".mat");
+            MatFileReader matFileReaderColorSyle = new MatFileReader("F:/Mini/data/"+cName+".mat");
             MLArray mlArrayTarget = matFileReaderTarget.getMLArray("target_l");
             MLArray mlArrayColorStyle = matFileReaderColorSyle.getMLArray("color_lab");
             MLDouble targetML=(MLDouble)mlArrayTarget;//将MAT文件内容转成double类型,target文件的ls值
@@ -70,14 +71,19 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
                     mat2.put(j,i,BGR[count]);
                     count ++;
                 }
-            Imgcodecs.imwrite("E:/ColorTransfer/output/"+pName+"-"+cName+"Result.jpg",mat2);
+            Imgcodecs.imwrite("F:/Mini/result/"+pName+"-"+cName+"Result.jpg",mat2);
             System.out.println("transfer2 OK");
             long endTime=System.currentTimeMillis();
             System.out.println("运行时间："+(double)(endTime-startTime)/1000+"s");
+            //更新计数表
+//        Counter counter = counterDao.getCounter(Counter.getCounterId());
+//        counter.setImageCounter(counter.getImageCounter()+1);
+//        counterDao.updateImageCounter(counter);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return pName.substring(0,3);
     }
     public int [] BestMatch(double[][] ColorStyle, double[][] target){
         int [] result = new int[target.length];

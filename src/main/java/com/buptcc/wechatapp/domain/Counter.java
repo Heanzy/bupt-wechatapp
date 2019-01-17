@@ -1,5 +1,9 @@
 package com.buptcc.wechatapp.domain;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Counter {
     private final static int counterId = 4396;
 
@@ -52,4 +56,7 @@ public class Counter {
                 '}';
     }
 
+    public static int getCounterId() {
+        return counterId;
+    }
 }
