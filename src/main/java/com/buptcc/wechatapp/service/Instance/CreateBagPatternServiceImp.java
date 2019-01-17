@@ -1,7 +1,9 @@
 package com.buptcc.wechatapp.service.Instance;
 
 import com.buptcc.wechatapp.dao.CounterDao;
+import com.buptcc.wechatapp.dao.UserImageDao;
 import com.buptcc.wechatapp.domain.Counter;
+import com.buptcc.wechatapp.domain.UserImage;
 import com.buptcc.wechatapp.service.CreateBagPatternService;
 import com.buptcc.wechatapp.utils.Lab2Rgb;
 import com.jmatio.io.MatFileReader;
@@ -20,6 +22,10 @@ import java.io.IOException;
 public class CreateBagPatternServiceImp implements CreateBagPatternService {
     @Autowired
     CounterDao counterDao;
+    @Autowired
+    UserImageDao userImageDao;
+    @Autowired
+    UserImage userImage;
     @Value("${opencv.dll.path}")
     String fielpath;
     @Override
@@ -83,6 +89,10 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
 //        Counter counter = counterDao.getCounter(Counter.getCounterId());
 //        counter.setImageCounter(counter.getImageCounter()+1);
 //        counterDao.updateImageCounter(counter);
+//            //更新UserImage表
+//            userImage.setUserId(openId);
+//            userImage.setImageName(pName.substring(0,3)+counter.getImageCounter());
+//            userImageDao.insertImage(userImage);
         } catch (IOException e) {
             e.printStackTrace();
         }

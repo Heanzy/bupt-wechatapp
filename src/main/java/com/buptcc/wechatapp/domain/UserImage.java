@@ -1,14 +1,20 @@
 package com.buptcc.wechatapp.domain;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author: xgp
  * @date: 2019/1/17 15:21
  */
+@Component
 public class UserImage {
     private Integer userimageID;
     private String openId;
     private String imageName;
 
+    UserImage(){
+
+    }
     public UserImage(Integer ID, String userId, String imageName) {
         this.userimageID = ID;
         this.openId = userId;
