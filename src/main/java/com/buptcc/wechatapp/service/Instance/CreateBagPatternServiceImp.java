@@ -11,6 +11,7 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,11 +20,14 @@ import java.io.IOException;
 public class CreateBagPatternServiceImp implements CreateBagPatternService {
     @Autowired
     CounterDao counterDao;
+    @Value("${opencv.dll.path}")
+    String fielpath;
     @Override
     public String createBagPattern(String openId, String pName, String cName) {
         long startTime=System.currentTimeMillis();
         try {
-            System.load("E:\\opencv-4.0.1\\opencv\\build\\java\\x64\\opencv_java401.dll");
+
+            System.load(fielpath);
             MatFileReader matFileReaderTarget = new MatFileReader("F:/Mini/data/"+pName+".mat");
             MatFileReader matFileReaderColorSyle = new MatFileReader("F:/Mini/data/"+cName+".mat");
             MLArray mlArrayTarget = matFileReaderTarget.getMLArray("target_l");

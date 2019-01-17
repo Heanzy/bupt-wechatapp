@@ -19,4 +19,8 @@ public class CreatePatternController {
                     @RequestParam("cName") String cName){
         return createBagPatternService.createBagPattern(openId,pName,cName);
     }
+    @RequestMapping("")
+    public String test(){
+        return "hello worldd";
+    }
 }
