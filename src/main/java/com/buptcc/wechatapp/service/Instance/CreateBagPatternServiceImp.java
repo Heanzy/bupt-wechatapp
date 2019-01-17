@@ -1,5 +1,6 @@
 package com.buptcc.wechatapp.service.Instance;
 
+import com.buptcc.wechatapp.dao.CounterDao;
 import com.buptcc.wechatapp.service.CreateBagPatternService;
 import com.buptcc.wechatapp.utils.Lab2Rgb;
 import com.jmatio.io.MatFileReader;
@@ -15,8 +16,8 @@ import java.io.IOException;
 
 @Service
 public class CreateBagPatternServiceImp implements CreateBagPatternService {
-
-
+    @Autowired
+    CounterDao counterDao;
     @Override
     public String createBagPattern(String openId, String pName, String cName) {
         long startTime=System.currentTimeMillis();

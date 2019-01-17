@@ -2,7 +2,9 @@ package com.buptcc.wechatapp.dao;
 
 import com.buptcc.wechatapp.domain.Counter;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface CounterDao {
     boolean updateImageCounter(@Param("counter")Counter counter);
 
@@ -10,4 +12,5 @@ public interface CounterDao {
 
     boolean updataUn(@Param("counter")Counter counter);
 
+    Counter getCounter(@Param("counterId") Integer counterId);
 }

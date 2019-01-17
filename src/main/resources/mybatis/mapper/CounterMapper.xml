@@ -43,4 +43,11 @@
         </set>
         where counterId = #{counter.counterId,jdbcType=INTEGER}
     </update>
+
+    <select id="getCounter" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from notice
+        where counterId = #{counterId,jdbcType=INTEGER}
+    </select>
 </mapper>
