@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.buptcc.wechatapp.dao.UserImageDao" > <!-- 项目的dao层 -->
+    <resultMap id="BaseResultMap" type="com.buptcc.wechatapp.domain.UserImage" > <!-- 实体类 -->
+        <id column="userimageID" property="userimageID" jdbcType="INTEGER" />            <!-- 列名映射 -->
+        <result column="openId" property="openId" jdbcType="VARCHAR" />
+        <result column="imageName" property="imageName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        openId, imageName
+    </sql>
+
+    <!-- 根据id更新通知信息 -->
+    <insert id="insertImage" parameterType="com.buptcc.wechatapp.domain.UserImage">
+        insert into userimage
+        (
+          openId, imageName
+        )
+        VALUES
+        (
+          #{userImage.openId,jdbcType=VARCHAR},
+          #{userImage.imageName,jdbcType=VARCHAR}
+        )
+
+    </insert>
+    <delete id="deleteByOpenId" parameterType="java.lang.String">
+        delete from userImage
+        where openId = #{openId,jdbcType=INTEGER}
+    </delete>
+    <select id="countByOpenId" parameterType="java.lang.String">
+        select count (distinct openId) from userimage
+    </select>
+</mapper>

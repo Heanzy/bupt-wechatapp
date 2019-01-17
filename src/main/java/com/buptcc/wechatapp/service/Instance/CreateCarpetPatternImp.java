@@ -1,14 +1,14 @@
 package com.buptcc.wechatapp.service.Instance;
 
-import java.lang.reflect.Field;
+
 import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
 import com.buptcc.wechatapp.service.CreateCarpetPatternService;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.ServletContextEvent;
+
 
 /**
  * @author: xgp
@@ -20,13 +20,13 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
     public String Combine(String  br, String c, String m){
         Mat res = combine(br, c, m);
         Date date = new Date();
-        String s = "F:\\imagedata\\"+date+".png";
+        String s = "F:\\imagedata\\"+date.getTime()+".png";
         Imgcodecs.imwrite(s,res);
         return s;
     }
 
     private Mat load(String path) {
-        System.loadLibrary("opencv_java401.dll");
+        System.load("D:\\program Files\\Java\\jdk1.8.0_161\\bin\\opencv_java401.dll");
         Mat src = Imgcodecs.imread(path,-1);
         return src;
     }
@@ -160,4 +160,5 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         Mat com = CornerPlusBrink(corner, brink);
         return plusAll(medal,com);
     }
+
 }
