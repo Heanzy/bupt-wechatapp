@@ -21,6 +21,6 @@ public class CreatePatternController {
     }
     @RequestMapping("")
     public String test(){
-        return "hello worldd";
+        return "hello world";
     }
 }
