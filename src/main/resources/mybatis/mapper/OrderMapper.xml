@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.lhh.appservermaster.dao.OrderDao" > <!-- 项目的dao层 -->
-    <resultMap id="BaseResultMap" type="com.lhh.appservermaster.domain.Order" > <!-- 实体类 -->
+<mapper namespace="com.buptcc.wechatapp.dao.OrderDao" > <!-- 项目的dao层 -->
+    <resultMap id="BaseResultMap" type="com.buptcc.wechatapp.domain.Order" > <!-- 实体类 -->
         <id column="orderId" property="orderId" jdbcType="INTEGER" />            <!-- 列名映射 -->
         <result column="orderName" property="orderName" jdbcType="VARCHAR" />
         <result column="userId" property="userId" jdbcType="INTEGER" />
@@ -40,7 +40,7 @@
     </select>
 
     <!-- 插入一条订单信息 -->
-    <insert id="addOrder" parameterType="com.lhh.appservermaster.domain.Order">
+    <insert id="addOrder" parameterType="com.buptcc.wechatapp.domain.Order">
         insert into orders
         (
           orderName, userId, expressCompanyName, expressCompanyAddress, receiveAddressId, addTime, orderState, orderPay, remark, receiveCode, userPhone, orderEvaluate, takeUserId, score, orderType, orderPic, receiveName, receivePhone, receiveState, receiveAddressName
@@ -80,7 +80,7 @@
     </select>
 
     <!-- 根据id更新订单信息 -->
-    <update id="updateOrderInfoByID" parameterType="com.lhh.appservermaster.domain.Order">
+    <update id="updateOrderInfoByID" parameterType="com.buptcc.wechatapp.domain.Order">
         update orders
         <set>
             <if test = "order.orderName != null">
@@ -179,7 +179,7 @@
     </select>
 
     <!-- 模糊查询订单n -->
-    <select id="getOrdersByQuery" resultMap="BaseResultMap" parameterType="com.lhh.appservermaster.domain.query.OrderQuery">
+    <select id="getOrdersByQuery" resultMap="BaseResultMap" parameterType="com.buptcc.wechatapp.domain.query.OrderQuery">
         SELECT
         <include refid="Base_Column_List" />
         FROM orders

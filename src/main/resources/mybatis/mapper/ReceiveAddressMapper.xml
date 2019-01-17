@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.lhh.appservermaster.dao.ReceiveAddressDao" > <!-- 项目的dao层 -->
-    <resultMap id="BaseResultMap" type="com.lhh.appservermaster.domain.ReceiveAddress" > <!-- 实体类 -->
+<mapper namespace="com.buptcc.wechatapp.dao.ReceiveAddressDao" > <!-- 项目的dao层 -->
+    <resultMap id="BaseResultMap" type="com.buptcc.wechatapp.domain.ReceiveAddress" > <!-- 实体类 -->
         <id column="receiveId" property="receiveId" jdbcType="INTEGER" />            <!-- 列名映射 -->
         <result column="receiveName" property="receiveName" jdbcType="VARCHAR" />
         <result column="receivePhone" property="receivePhone" jdbcType="VARCHAR" />
@@ -23,7 +23,7 @@
     </select>
 
     <!-- 插入一条收货地址信息 -->
-    <insert id="addReceiveAddress" parameterType="com.lhh.appservermaster.domain.ReceiveAddress">
+    <insert id="addReceiveAddress" parameterType="com.buptcc.wechatapp.domain.ReceiveAddress">
         insert into receiveAddress
         (
           receiveId, receiveName, receivePhone, receiveState, receiveAddressName, userId
@@ -49,7 +49,7 @@
     </select>
 
     <!-- 根据id更新收货地址信息 -->
-    <update id="updateReceiveAddressByID" parameterType="com.lhh.appservermaster.domain.ReceiveAddress">
+    <update id="updateReceiveAddressByID" parameterType="com.buptcc.wechatapp.domain.ReceiveAddress">
         update receiveAddress
         <set>
             <if test = "receiveAddress.receiveName != null">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.lhh.appservermaster.dao.NoticeDao" > <!-- 项目的dao层 -->
-    <resultMap id="BaseResultMap" type="com.lhh.appservermaster.domain.Notice" > <!-- 实体类 -->
+<mapper namespace="com.buptcc.wechatapp.dao.NoticeDao" > <!-- 项目的dao层 -->
+    <resultMap id="BaseResultMap" type="com.buptcc.wechatapp.domain.Notice" > <!-- 实体类 -->
         <id column="noticeId" property="noticeId" jdbcType="INTEGER" />            <!-- 列名映射 -->
         <result column="noticeTitle" property="noticeTitle" jdbcType="VARCHAR" />
         <result column="noticeContent" property="noticeContent" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
     </select>
 
     <!-- 插入一条通知信息 -->
-    <insert id="addNotice" parameterType="com.lhh.appservermaster.domain.Notice">
+    <insert id="addNotice" parameterType="com.buptcc.wechatapp.domain.Notice">
         insert into notice
         (
           noticeTitle, noticeContent, noticeFile, publishDate
@@ -46,7 +46,7 @@
     </select>
 
     <!-- 根据id更新通知信息 -->
-    <update id="updateNotice" parameterType="com.lhh.appservermaster.domain.Notice">
+    <update id="updateNotice" parameterType="com.buptcc.wechatapp.domain.Notice">
         update notice
         <set>
             <if test = "notice.noticeTitle != null">
