@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CreatePatternController {
     @Autowired
     private CreateCarpetPatternService createCarpetPatternService;
-    @PostMapping("/test/")
+    @PostMapping("/test")
     public String Combine(@RequestParam String ename,String cname,String mname){return createCarpetPatternService.Combine(ename, cname, mname);}
 }
