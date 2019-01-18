@@ -14,7 +14,7 @@ import java.util.Map;
  * @author: xgp
  * @date: 2019/1/17 10:36
  */
-//@Service
+@Service
 public class CreateCarpetPatternImp implements CreateCarpetPatternService {
     @Override
     public String Combine(String  br, String c, String m){
