@@ -32,8 +32,8 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
     UserImageDao userImageDao;
     @Autowired
     UserImage userImage;
-    @Value("${opencv.dll.path}")
-    String fielpath;
+//    @Value("${opencv.dll.path}")
+//    String fielpath;
     @Override
     public String createBagPattern(String openId, String pName, String cName) {
         BufferedImage bufferedImage = new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);

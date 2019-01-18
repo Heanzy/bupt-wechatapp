@@ -38,27 +38,30 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
     private UserOpenIdService userOpenIdService;
     @Override
     public String Combine(String  br, String c, String m){
-        long startTime = System.currentTimeMillis();   //获取开始时间、
+
         //read
-        //BufferedImage res = combine("F:/Mini/data/"+br+".png", "F:/Mini/data/"+c+".png", "F:/Mini/data/"+m+".png");
-        BufferedImage res = combine(br,c,m);
+        BufferedImage res = combine("F:/Mini/data/"+br+".png", "F:/Mini/data/"+c+".png", "F:/Mini/data/"+m+".png");
         //write
-        String s ="F:imagedata/output/test.png";
+        //获取图片计数
+        Counter counter = counterDao.getCounter(Counter.getCounterId());
+        String s ="F:/Mini/result/C01"+String.format("%05d",counter.getImageCounter())+"result.png";
         try {
             ImageIO.write(res, "png", new File(s));
         } catch (IOException e) {
             System.out.println(e);
         }
-        //更新数据库图片计数
-//        Counter counter = counterDao.getCounter(4396);
-//        counter.setUn(counter.getUn()+1);
-//        counterDao.updataUn(counter);
-        //更新userImage表
-//        UserImage userImage = new UserImage(0,"ewdadef",br);
-//        userImageDao.insertImage(userImage);
-        long endTime = System.currentTimeMillis(); //获取结束时间
+        String openId = "1515"; //用户唯一ID
 
-        System.out.println("计算运行时间： " + (endTime - startTime) + "ms");
+        //更新数据库图片计数
+        counter.setImageCounter(counter.getImageCounter()+1);
+        counterDao.updateImageCounter(counter);
+
+        //更新UserImage表
+        UserImage userImage = new UserImage();
+        userImage.setUserId(openId);
+        userImage.setImageName(s.substring(0,3)+counter.getImageCounter());
+        userImageDao.insertImage(userImage);
+
         return s.substring(0,3);
     }
 
