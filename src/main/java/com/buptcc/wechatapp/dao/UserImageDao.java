@@ -10,6 +10,6 @@ public interface UserImageDao {
 
     boolean deleteByOpenId(@Param("openId") String openId);
 
-    int countByOpenId(@Param("openId") String openId);
+    int countByOpenId();
 
 }
