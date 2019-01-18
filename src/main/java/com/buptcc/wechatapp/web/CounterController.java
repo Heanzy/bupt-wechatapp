@@ -23,7 +23,7 @@ public class CounterController {
     public boolean updatePv(Counter counter){return counterService.updatePv(counter);}
 
     @RequestMapping("/updataUn")
-    public boolean updataUn(Counter counter){return counterService.updataUn(counter);}
+    public boolean updataUn(Counter counter){return counterService.updateUn(counter);}
 
     @RequestMapping("/getCounter")
     public Counter getCounter(Integer counterId){return counterService.getCounter(counterId);}

@@ -12,7 +12,7 @@ public interface CounterService {
 
     boolean updatePv(Counter counter);
 
-    boolean updataUn(Counter counter);
+    boolean updateUn(Counter counter);
 
     Counter getCounter(Integer counterId);
 }

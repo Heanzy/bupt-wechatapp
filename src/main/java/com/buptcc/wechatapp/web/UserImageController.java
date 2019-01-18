@@ -22,5 +22,5 @@ public class UserImageController {
     public boolean deleteByOpenId(@RequestParam String openId){return userImageService.deleteByOpenId(openId);}
 
     @RequestMapping("/countByOpenId")
-    public int countByOpenId(@RequestParam String openId){return userImageService.countByOpenId(openId);}
+    public int countByOpenId(){return userImageService.countByOpenId();}
 }

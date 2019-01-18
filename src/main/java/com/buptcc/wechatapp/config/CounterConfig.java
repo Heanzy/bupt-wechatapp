@@ -19,6 +19,6 @@ public class CounterConfig {
     private void countTask() {
         int userCount = userImageDao.countByOpenId();
         Counter counter = new Counter(0,0,userCount);
-        counterDao.updataUn(counter);
+        counterDao.updateUn(counter);
     }
 }

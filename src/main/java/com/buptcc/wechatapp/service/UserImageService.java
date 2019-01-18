@@ -12,5 +12,5 @@ public interface UserImageService {
 
     boolean deleteByOpenId(String openId);
 
-    int countByOpenId( String openId);
+    int countByOpenId();
 }

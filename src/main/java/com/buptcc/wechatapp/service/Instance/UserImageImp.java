@@ -27,7 +27,7 @@ public class UserImageImp implements UserImageService {
     }
 
     @Override
-    public int countByOpenId( String openId){
-        return userImageDao.countByOpenId(openId);
+    public int countByOpenId(){
+        return userImageDao.countByOpenId();
     }
 }

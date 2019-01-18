@@ -10,7 +10,7 @@ public interface CounterDao {
 
     boolean updatePv(@Param("counter")Counter counter);
 
-    boolean updataUn(@Param("counter")Counter counter);
+    boolean updateUn(@Param("counter")Counter counter);
 
     Counter getCounter(@Param("counterId") Integer counterId);
 }

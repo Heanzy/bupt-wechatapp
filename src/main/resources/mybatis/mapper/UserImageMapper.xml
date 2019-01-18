@@ -29,7 +29,7 @@
         delete from userimage
         where openId = #{openId,jdbcType=VARCHAR}
     </delete>
-    <select id="countByOpenId" parameterType="java.lang.String">
-        select count (distinct openId) from userimage
+    <select id="countByOpenId" resultType="INTEGER">
+        select count(distinct openId) from userimage
     </select>
 </mapper>

@@ -24,7 +24,7 @@ public class CounterImp implements CounterService {
     public boolean updatePv(Counter counter){return counterDao.updatePv(counter);}
 
     @Override
-    public boolean updataUn(Counter counter){return counterDao.updataUn(counter);}
+    public boolean updateUn(Counter counter){return counterDao.updateUn(counter);}
 
     @Override
     public Counter getCounter(Integer counterId){return counterDao.getCounter(counterId);}
