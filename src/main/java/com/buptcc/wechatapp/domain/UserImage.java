@@ -11,10 +11,12 @@ public class UserImage {
     private Integer userimageID;
     private String openId;
     private String imageName;
+    public UserImage(){
 
-    public UserImage(Integer ID, String userId, String imageName) {
+    }
+    public UserImage(Integer ID, String openId, String imageName) {
         this.userimageID = ID;
-        this.openId = userId;
+        this.openId = openId;
         this.imageName = imageName;
     }
     public Integer getID() {

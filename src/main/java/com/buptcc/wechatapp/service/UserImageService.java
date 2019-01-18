@@ -1,7 +1,6 @@
 package com.buptcc.wechatapp.service;
 
 import com.buptcc.wechatapp.domain.UserImage;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * @author: xgp
@@ -11,7 +10,7 @@ public interface UserImageService {
 
     boolean insertImage( UserImage userImage);
 
-    boolean deleteByOpenID(String openId);
+    boolean deleteByOpenId(String openId);
 
     int countByOpenId( String openId);
 }

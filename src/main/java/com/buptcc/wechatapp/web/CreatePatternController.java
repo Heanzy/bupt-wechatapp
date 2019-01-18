@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class CreatePatternController {
     @Autowired
     private CreateCarpetPatternService createCarpetPatternService;
-    @RequestMapping("/test")
+    @RequestMapping("/create-cp")
     public String Combine(@RequestParam String ename,String cname,String mname){return createCarpetPatternService.Combine(ename, cname, mname);}
     @Autowired
     private CreateBagPatternService createBagPatternService;

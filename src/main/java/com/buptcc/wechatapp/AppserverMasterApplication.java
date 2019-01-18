@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+import java.lang.reflect.Field;
+
 @SpringBootApplication
 @MapperScan("com.buptcc.wechatapp.dao")
 public class AppserverMasterApplication extends SpringBootServletInitializer {
@@ -16,6 +18,7 @@ public class AppserverMasterApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
+        //System.load("D:\\Program Files\\Java\\jre\\bin\\opencv_java345.dll");
         SpringApplication.run(AppserverMasterApplication.class, args);
 
     }

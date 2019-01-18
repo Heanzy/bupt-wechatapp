@@ -47,7 +47,7 @@
     <select id="getCounter" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
-        from notice
+        from counter
         where counterId = #{counterId,jdbcType=INTEGER}
     </select>
 </mapper>

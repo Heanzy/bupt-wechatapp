@@ -26,8 +26,8 @@
 
     </insert>
     <delete id="deleteByOpenId" parameterType="java.lang.String">
-        delete from userImage
-        where openId = #{openId,jdbcType=INTEGER}
+        delete from userimage
+        where openId = #{openId,jdbcType=VARCHAR}
     </delete>
     <select id="countByOpenId" parameterType="java.lang.String">
         select count (distinct openId) from userimage

@@ -14,15 +14,18 @@ import org.springframework.stereotype.Service;
 public class UserImageImp implements UserImageService {
     @Autowired
     private UserImageDao userImageDao;
+
     @Override
     public boolean insertImage( UserImage userImage){
         return userImageDao.insertImage(userImage);
     }
+
     @Override
-    public boolean deleteByOpenID(String openId)
+    public boolean deleteByOpenId(String openId)
     {
-        return userImageDao.deleteByOpenID(openId);
+        return userImageDao.deleteByOpenId(openId);
     }
+
     @Override
     public int countByOpenId( String openId){
         return userImageDao.countByOpenId(openId);

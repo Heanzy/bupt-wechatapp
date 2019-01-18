@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public interface UserImageDao {
     boolean insertImage(@Param("userImage") UserImage userImage);
 
-    boolean deleteByOpenID(@Param("openId") String openId);
+    boolean deleteByOpenId(@Param("openId") String openId);
 
     int countByOpenId(@Param("openId") String openId);
 
