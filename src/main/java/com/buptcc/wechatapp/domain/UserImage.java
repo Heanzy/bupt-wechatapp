@@ -12,9 +12,6 @@ public class UserImage {
     private String openId;
     private String imageName;
 
-    UserImage(){
-
-    }
     public UserImage(Integer ID, String userId, String imageName) {
         this.userimageID = ID;
         this.openId = userId;
