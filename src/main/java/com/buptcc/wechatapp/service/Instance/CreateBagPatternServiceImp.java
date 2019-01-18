@@ -1,5 +1,6 @@
 package com.buptcc.wechatapp.service.Instance;
 
+import com.buptcc.wechatapp.config.DllLibraryPath;
 import com.buptcc.wechatapp.dao.CounterDao;
 import com.buptcc.wechatapp.dao.UserImageDao;
 import com.buptcc.wechatapp.domain.Counter;
@@ -9,6 +10,8 @@ import com.buptcc.wechatapp.utils.Lab2Rgb;
 import com.jmatio.io.MatFileReader;
 import com.jmatio.types.MLArray;
 import com.jmatio.types.MLDouble;
+//import org.opencv.core.CvType;
+//import org.opencv.core.Mat;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -16,6 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -30,10 +36,9 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
     String fielpath;
     @Override
     public String createBagPattern(String openId, String pName, String cName) {
+        BufferedImage bufferedImage = new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);
         long startTime=System.currentTimeMillis();
         try {
-
-            System.load(fielpath);
             MatFileReader matFileReaderTarget = new MatFileReader("F:/Mini/data/"+pName+".mat");
             MatFileReader matFileReaderColorSyle = new MatFileReader("F:/Mini/data/"+cName+".mat");
             MLArray mlArrayTarget = matFileReaderTarget.getMLArray("target_l");
@@ -67,37 +72,37 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
                 Lab[i][0] = Lab[i][0]*100;//l值乘100
 
             double [][]RGB = LAB2RGB(Lab);
-            double [][]BGR = new double[RGB.length][3];
             for(int i = 0; i < RGB.length;i++){
-                BGR[i][0] = RGB[i][2];
-                BGR[i][1] = RGB[i][1];
-                BGR[i][2] = RGB[i][0];
-
+                RGB[i][0] = Math.abs(RGB[i][0]);
+                RGB[i][1] = Math.abs(RGB[i][1]);
+                RGB[i][2] = Math.abs(RGB[i][2]);
             }
-            Mat mat2 = new Mat(500,500, CvType.CV_8UC3);
+            int [] useToBufferedImage = doub2Integ(RGB);
             int count = 0;
-            for(int i = 0;i < mat2.cols(); i++)
-                for(int j = 0; j< mat2.rows();j++){
-                    mat2.put(j,i,BGR[count]);
-                    count ++;
+            for(int i=0;i<bufferedImage.getHeight();i++)
+                for(int j=0;j<bufferedImage.getWidth();j++){
+                    bufferedImage.setRGB(i,j,useToBufferedImage[count]);
+                    count++;
                 }
-            Imgcodecs.imwrite("F:/Mini/result/"+pName+"-"+cName+"Result.jpg",mat2);
+//            Imgcodecs.imwrite("F:/Mini/result/"+pName+"-"+cName+"Result.jpg",mat2);
+            File file = new File("F:/Mini/result/"+pName+"-"+cName+"Result.jpg");
+            ImageIO.write(bufferedImage,"jpg",file);
             System.out.println("transfer2 OK");
             long endTime=System.currentTimeMillis();
             System.out.println("运行时间："+(double)(endTime-startTime)/1000+"s");
             //更新计数表
-//        Counter counter = counterDao.getCounter(Counter.getCounterId());
-//        counter.setImageCounter(counter.getImageCounter()+1);
-//        counterDao.updateImageCounter(counter);
-//            //更新UserImage表
-//            userImage.setUserId(openId);
-//            userImage.setImageName(pName.substring(0,3)+counter.getImageCounter());
-//            userImageDao.insertImage(userImage);
+        Counter counter = counterDao.getCounter(Counter.getCounterId());
+        counter.setImageCounter(counter.getImageCounter()+1);
+        counterDao.updateImageCounter(counter);
+            //更新UserImage表
+            userImage.setUserId(openId);
+            userImage.setImageName(pName.substring(0,3)+counter.getImageCounter());
+            userImageDao.insertImage(userImage);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return pName.substring(0,3);
+        System.out.println(pName.substring(0,3));
+        return userImage.getImageName();
     }
     public int [] BestMatch(double[][] ColorStyle, double[][] target){
         int [] result = new int[target.length];
@@ -134,5 +139,16 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
         for(int i=0;i<LAB.length;i++)
             RGB[i] = Lab2Rgb.LAB2RGB(LAB[i]);
         return RGB;
+    }
+    public int [] doub2Integ(double [][] RGB){
+        int [] result = new int[RGB.length];
+        for(int i= 0; i<RGB.length;i++){
+            int r = (int)RGB[i][0];
+            int g = (int)RGB[i][1];
+            int b = (int)RGB[i][2];
+            result[i] = (r<<16)|(g<<8)|(b);
+
+        }
+        return result;
     }
 }
