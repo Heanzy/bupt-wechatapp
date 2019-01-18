@@ -10,11 +10,6 @@ import com.buptcc.wechatapp.utils.Lab2Rgb;
 import com.jmatio.io.MatFileReader;
 import com.jmatio.types.MLArray;
 import com.jmatio.types.MLDouble;
-//import org.opencv.core.CvType;
-//import org.opencv.core.Mat;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -96,7 +91,7 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
         counterDao.updateImageCounter(counter);
             //更新UserImage表
             userImage.setUserId(openId);
-            userImage.setImageName(pName.substring(0,3)+counter.getImageCounter());
+            userImage.setImageName(pName.substring(0,3)+String.format("%05d",counter.getImageCounter()));
             userImageDao.insertImage(userImage);
         } catch (IOException e) {
             e.printStackTrace();
