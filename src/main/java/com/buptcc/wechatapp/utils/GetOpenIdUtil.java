@@ -11,7 +11,7 @@ import java.net.URLConnection;
 
 public class GetOpenIdUtil {
 
-    public String getopenid(String appid,String code,String secret) {
+    public static String getopenid(String appid,String code,String secret) {
         BufferedReader in = null;
         //appid和secret是开发者分别是小程序ID和小程序密钥
         String url="https://api.weixin.qq.com/sns/jscode2session?appid="

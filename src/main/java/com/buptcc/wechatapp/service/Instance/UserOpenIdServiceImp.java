@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserOpenIdServiceImp implements UserOpenIdService {
-    private GetOpenIdUtil getOpenIdUtil;
     @Value("${appid}")
     private String appid;
     @Value("${secret}")
@@ -24,6 +23,6 @@ public class UserOpenIdServiceImp implements UserOpenIdService {
         counter.setPv(counter.getPv()+1);
         counterDao.updatePv(counter);
 
-        return getOpenIdUtil.getopenid(appid,code,secret);
+        return GetOpenIdUtil.getopenid(appid,code,secret);
     }
 }
