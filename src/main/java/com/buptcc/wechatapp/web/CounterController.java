@@ -16,15 +16,15 @@ public class CounterController {
     @Autowired
     private CounterService counterService;
 
-    @RequestMapping("/updateImageCounter")
+    @RequestMapping("mini/updateImageCounter")
     public boolean updateImageCounter(Counter counter){return counterService.updateImageCounter(counter);}
 
-    @RequestMapping("/updatePv")
+    @RequestMapping("mini/updatePv")
     public boolean updatePv(Counter counter){return counterService.updatePv(counter);}
 
-    @RequestMapping("/updataUn")
+    @RequestMapping("mini/updataUn")
     public boolean updataUn(Counter counter){return counterService.updateUn(counter);}
 
-    @RequestMapping("/getCounter")
+    @RequestMapping("mini/getCounter")
     public Counter getCounter(Integer counterId){return counterService.getCounter(counterId);}
 }

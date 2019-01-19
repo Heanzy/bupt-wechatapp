@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserServiceController {
     @Autowired
     UserOpenIdService userOpenIdService;
-    @GetMapping("/getOpenId")
+    @GetMapping("mini/getOpenId")
     public String getUserOpenId(@RequestParam("code") String code){
         return userOpenIdService.getUserOpenId(code);
     }

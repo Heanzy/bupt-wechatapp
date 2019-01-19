@@ -12,7 +12,7 @@ public class ImageURLPatternConfiguration extends WebMvcConfigurationSupport {
         // location
         // registry.addResourceHandler("/user-images/**").addResourceLocations("file:D:\\app-server\\user-images\\");
         // remote
-        registry.addResourceHandler("/image_resources/**").addResourceLocations("/root/env/vrwbg/mini/data/");
+        registry.addResourceHandler("mini/image_resources/**").addResourceLocations("/root/env/vrwbg/mini/data/");
         super.addResourceHandlers(registry);
     }
 
