@@ -4,6 +4,9 @@
  */
 package com.buptcc.wechatapp.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -32,7 +35,8 @@ public class GetOpenIdUtil {
             while ((line = in.readLine()) != null) {
                 sb.append(line);
             }
-            return sb.toString();
+            JSONObject json = JSON.parseObject(sb.toString());
+            return (String)json.get("openid");
         } catch (Exception e1) {
             throw new RuntimeException(e1);
         }
