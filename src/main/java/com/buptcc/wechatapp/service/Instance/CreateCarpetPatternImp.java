@@ -7,19 +7,13 @@ import com.buptcc.wechatapp.dao.UserImageDao;
 import com.buptcc.wechatapp.domain.Counter;
 import com.buptcc.wechatapp.domain.UserImage;
 import com.buptcc.wechatapp.service.UserOpenIdService;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
 import com.buptcc.wechatapp.service.CreateCarpetPatternService;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
