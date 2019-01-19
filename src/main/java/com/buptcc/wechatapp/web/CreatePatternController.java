@@ -10,7 +10,7 @@ public class CreatePatternController {
     @Autowired
     private CreateCarpetPatternService createCarpetPatternService;
     @RequestMapping("/create-cp")
-    public String Combine(@RequestParam String ename,String cname,String mname){return createCarpetPatternService.Combine(ename, cname, mname);}
+    public String Combine(@RequestParam String ename,String cname,String mname, String openId){return createCarpetPatternService.Combine(ename, cname, mname,openId);}
     @Autowired
     private CreateBagPatternService createBagPatternService;
     @RequestMapping("/create-bp")
