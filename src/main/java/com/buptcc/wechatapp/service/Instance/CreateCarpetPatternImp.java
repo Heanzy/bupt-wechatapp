@@ -45,8 +45,9 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         //write
         //获取图片计数
         Counter counter = counterDao.getCounter(Counter.getCounterId());
+        counter.setImageCounter(counter.getImageCounter()+1);
         String imageName ="C01" + String.format("%05d",counter.getImageCounter());
-        String wpath ="F:/Mini/result/" + ename +'-' + cname + '-' +mname +"Result.png";
+        String wpath ="F:/Mini/result/"+imageName+".png";
         try {
             ImageIO.write(res, "png", new File(wpath));
         } catch (IOException e) {
@@ -54,7 +55,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         }
 
         //更新数据库图片计数
-        counter.setImageCounter(counter.getImageCounter()+1);
+        counter.setImageCounter(counter.getImageCounter());
         counterDao.updateImageCounter(counter);
 
         //更新UserImage表
