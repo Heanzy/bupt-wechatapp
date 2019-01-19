@@ -37,18 +37,18 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
     @Autowired
     private UserOpenIdService userOpenIdService;
     @Override
-    public String Combine(String  br, String c, String m, String openId){
+    public String Combine(String  ename, String cname, String mname, String openId){
 
-        final String path="F:/mini/data/";
+        final String path="F:/Mini/data/";
         //read
-        BufferedImage res = combine(path+br+".png", path+c+".png", path+m+".png");
+        BufferedImage res = combine(path+ename+".png", path+cname+".png", path+mname+".png");
         //write
         //获取图片计数
         Counter counter = counterDao.getCounter(Counter.getCounterId());
-        String imageName ="C01" + String.format("%05d",counter.getImageCounter())+"result.png";
-        String s =path + imageName;
+        String imageName ="C01" + String.format("%05d",counter.getImageCounter());
+        String wpath ="F:/Mini/result/" + ename +'-' + cname + '-' +mname +"Result.png";
         try {
-            ImageIO.write(res, "png", new File(s));
+            ImageIO.write(res, "png", new File(wpath));
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -60,10 +60,10 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         //更新UserImage表
         UserImage userImage = new UserImage();
         userImage.setUserId(openId);
-        userImage.setImageName(s.substring(0,8));
+        userImage.setImageName(imageName);
         userImageDao.insertImage(userImage);
 
-        return s.substring(0,8);
+        return userImage.getImageName();
     }
 
     static BufferedImage load(String path) {
