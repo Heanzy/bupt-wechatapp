@@ -80,18 +80,20 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
                     count++;
                 }
 //            Imgcodecs.imwrite("F:/Mini/result/"+pName+"-"+cName+"Result.jpg",mat2);
-            File file = new File("F:/Mini/result/"+pName+"-"+cName+"Result.jpg");
-            ImageIO.write(bufferedImage,"jpg",file);
-            System.out.println("transfer2 OK");
+
             long endTime=System.currentTimeMillis();
             System.out.println("运行时间："+(double)(endTime-startTime)/1000+"s");
             //更新计数表
         Counter counter = counterDao.getCounter(Counter.getCounterId());
         counter.setImageCounter(counter.getImageCounter()+1);
         counterDao.updateImageCounter(counter);
+
             //更新UserImage表
             userImage.setUserId(openId);
             userImage.setImageName(pName.substring(0,3)+String.format("%05d",counter.getImageCounter()));
+            File file = new File("F:/Mini/result/"+userImage.getImageName()+".jpg");
+            ImageIO.write(bufferedImage,"jpg",file);
+            System.out.println("transfer2 OK");
             userImageDao.insertImage(userImage);
         } catch (IOException e) {
             e.printStackTrace();
