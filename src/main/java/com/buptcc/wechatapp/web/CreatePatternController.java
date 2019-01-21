@@ -6,6 +6,12 @@ import com.buptcc.wechatapp.service.CreateCarpetPatternService;
 import com.buptcc.wechatapp.utils.ImageName2MatName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author Heanzy
+ *
+ *
+ */
 @RestController
 public class CreatePatternController {
     @Autowired
