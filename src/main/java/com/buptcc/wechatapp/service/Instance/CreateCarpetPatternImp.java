@@ -61,36 +61,27 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         return userImage.getImageName();
     }
 
-    static BufferedImage load(String path) {
-        BufferedImage img=null;
-        try {
-            img = ImageIO.read(new File(path));
-        } catch (IOException e) {
-
-        }
-        return img;
-    }
 
     //将角与边叠加
-    static BufferedImage CornerPlusBrink(BufferedImage corner, BufferedImage brink,BufferedImage medal){
+    static int[] getBr(BufferedImage brink){
         int[] b = new int[4];
         int k = 200; //第200行中每一列的R值第一个大于246的点 +2是r，顺序为 B G R
         int z;
-        for (z = 0; z < 600; z++) {
+        for (z = 26; z < 600; z++) {
             //System.out.println(data[index+j+2]);
             if((brink.getRGB(z,k)&0xff000000) == 0)
                 break;
         }
         b[0] = z;
-        for (z = 599; z >=0; z--) {
+        for (z = 574; z >=0; z--) {
             //System.out.println(data[index+j+2]);
             if((brink.getRGB(z,k)&0xff000000) == 0)
                 break;
         }
         b[1] = z;
 
-        z = 300;
-        for (k = 0; k < 400; k++) {
+        z = 200;
+        for (k = 25; k < 400; k++) {
             if((brink.getRGB(z,k)&0xff000000) == 0)
                 break;
         }
@@ -100,6 +91,16 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
                 break;
         }
         b[3] = k;
+
+
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println(b[i]);
+        }
+        return b;
+    }
+
+    static BufferedImage CornerPlusBrink(BufferedImage corner, BufferedImage brink, int[] b) {
         if (corner!=null)
         {
             for(int i = 0; i < corner.getWidth(); i++){
@@ -124,17 +125,19 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
                 }
             }
         }
+        return brink;
+    }
+    static BufferedImage plusAll(BufferedImage other, BufferedImage medal) {
         for (int i = 0; i < 300; i++) {
             for (int j = 0; j < 600; j++) {
-                int t = brink.getRGB(j, i+50);
+                int t = other.getRGB(j, i+50);
                 if ((t&0xff000000) == 0) {
-                    brink.setRGB(j,i+50, medal.getRGB(j,i));
+                    other.setRGB(j,i+50, medal.getRGB(j,i));
                 }
             }
         }
-        return brink;
+        return other;
     }
-
     static double[] pre(Integer a) {
         double[] c= new double[3];
         c[0] = (double)((a&0xff0000)>>16);
@@ -200,9 +203,10 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         } catch (IOException e) {
 
         }
+        int[] b = getBr(brink);
         corner = colorTrans(corner,medal);
         brink = colorTrans(brink,medal);
-        return CornerPlusBrink(corner,brink,medal);
+        return plusAll(CornerPlusBrink(corner,brink,b),medal);
 
     }
 
