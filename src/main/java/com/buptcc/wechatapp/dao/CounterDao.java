@@ -4,6 +4,10 @@ import com.buptcc.wechatapp.domain.Counter;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Heanzy
+ *
+ */
 @Component
 public interface CounterDao {
     boolean updateImageCounter(@Param("counter")Counter counter);

@@ -2,6 +2,9 @@ package com.buptcc.wechatapp.domain;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Heanzy
+ */
 @Component
 public class CreateMesage {
     private String rName;
