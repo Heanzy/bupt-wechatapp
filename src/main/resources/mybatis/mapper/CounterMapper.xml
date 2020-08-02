@@ -10,7 +10,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        imageCounter, pv, un
+        image_Counter, pv, un
     </sql>
 
     <!-- 根据id更新通知信息 -->
