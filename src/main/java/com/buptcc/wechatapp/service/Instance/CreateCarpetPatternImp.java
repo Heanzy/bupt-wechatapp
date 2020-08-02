@@ -33,7 +33,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
     @Override
     public String Combine(String  ename, String cname, String mname, String openId){
 
-        final String path="/root/env/vrwbg/mini/data/";
+        final String path="/usr/webchatdata/data/";
         //read
         BufferedImage res = combine(path+ename+".png", path+cname+".png", path+mname+".png");
         //write
@@ -41,7 +41,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         Counter counter = counterDao.getCounter(Counter.getCounterId());
         counter.setImageCounter(counter.getImageCounter()+1);
         String imageName =ename.substring(0,3) + String.format("%05d",counter.getImageCounter());
-        String wpath ="/root/env/vrwbg/mini/result/"+imageName+".png";
+        String wpath ="/usr/webchatdata/result/"+imageName+".png";
         try {
             ImageIO.write(res, "png", new File(wpath));
         } catch (IOException e) {

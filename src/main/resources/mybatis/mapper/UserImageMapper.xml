@@ -3,9 +3,9 @@
 
 <mapper namespace="com.buptcc.wechatapp.dao.UserImageDao" > <!-- 项目的dao层 -->
     <resultMap id="BaseResultMap" type="com.buptcc.wechatapp.domain.UserImage" > <!-- 实体类 -->
-        <id column="userimageID" property="userimageID" jdbcType="INTEGER" />            <!-- 列名映射 -->
-        <result column="openId" property="openId" jdbcType="VARCHAR" />
-        <result column="imageName" property="imageName" jdbcType="VARCHAR" />
+        <id column="userimage_iD" property="userimageID" jdbcType="INTEGER" />            <!-- 列名映射 -->
+        <result column="open_id" property="openId" jdbcType="VARCHAR" />
+        <result column="image_name" property="imageName" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -16,7 +16,7 @@
     <insert id="insertImage" parameterType="com.buptcc.wechatapp.domain.UserImage">
         insert into userimage
         (
-          openId, imageName
+          open_id, image_name
         )
         VALUES
         (
@@ -27,9 +27,9 @@
     </insert>
     <delete id="deleteByOpenId" parameterType="java.lang.String">
         delete from userimage
-        where openId = #{openId,jdbcType=VARCHAR}
+        where open_id = #{openId,jdbcType=VARCHAR}
     </delete>
     <select id="countByOpenId" resultType="INTEGER">
-        select count(distinct openId) from userimage
+        select count(distinct open_id) from userimage
     </select>
 </mapper>

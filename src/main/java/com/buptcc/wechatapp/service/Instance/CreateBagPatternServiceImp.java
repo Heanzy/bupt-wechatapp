@@ -37,8 +37,8 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
         BufferedImage bufferedImage = new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);
         long startTime=System.currentTimeMillis();
         try {
-            MatFileReader matFileReaderTarget = new MatFileReader("/root/env/vrwbg/mini/data/"+pName+".mat");
-            MatFileReader matFileReaderColorSyle = new MatFileReader("/root/env/vrwbg/mini/data/"+cName+".mat");
+            MatFileReader matFileReaderTarget = new MatFileReader("/usr/webchatdata/data/"+pName+".mat");
+            MatFileReader matFileReaderColorSyle = new MatFileReader("/usr/webchatdata/data/"+cName+".mat");
             MLArray mlArrayTarget = matFileReaderTarget.getMLArray("target_l");
             MLArray mlArrayColorStyle = matFileReaderColorSyle.getMLArray("color_lab");
             MLDouble targetML=(MLDouble)mlArrayTarget;//将MAT文件内容转成double类型,target文件的ls值
@@ -94,7 +94,7 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
             //更新UserImage表
             userImage.setUserId(openId);
             userImage.setImageName(pName.substring(0,3)+String.format("%05d",counter.getImageCounter()));
-            File file = new File("/root/env/vrwbg/mini/result/"+userImage.getImageName()+".jpg");
+            File file = new File("/usr/webchatdata/result/"+userImage.getImageName()+".jpg");
             ImageIO.write(bufferedImage,"jpg",file);
             System.out.println("transfer2 OK");
             userImageDao.insertImage(userImage);

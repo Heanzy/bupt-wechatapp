@@ -6,7 +6,7 @@
     <groupId>com.buptcc</groupId>
     <artifactId>wechatapp</artifactId>
     <version>1.0.0-dev</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <!--
     <packaging>jar</packaging>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
