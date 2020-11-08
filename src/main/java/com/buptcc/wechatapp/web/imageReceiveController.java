@@ -1,6 +1,8 @@
 package com.buptcc.wechatapp.web;
 
+import com.buptcc.wechatapp.service.ImageReceiveService;
 import com.buptcc.wechatapp.utils.imageRename;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,24 +16,12 @@ import java.util.Objects;
 @RestController
 public class imageReceiveController {
 
+    @Autowired
+    ImageReceiveService imageReceiveService;
+
     @PostMapping("/uploadImage")
-    public String uploadImage(HttpServletRequest request, String preName){
+    public String uploadImage(HttpServletRequest request){
         MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
-        MultipartFile file = req.getFile("file");
-        String name = imageRename.name(preName);
-        String realPath = "/usr/webchatdata/data_custom/";
-        try {
-            File dir = new File(realPath);
-            if(!dir.exists()){
-                dir.mkdir();
-            }
-            File f = new File(realPath, name);
-            if (!Objects.isNull(file)) {
-                file.transferTo(f);
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return name;
+        return imageReceiveService.saveImage(req);
     }
 }

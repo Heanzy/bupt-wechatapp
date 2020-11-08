@@ -1,5 +1,8 @@
 package com.buptcc.wechatapp.utils;
 
+import com.buptcc.wechatapp.domain.CustomImage;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import java.util.UUID;
 
 /**
@@ -13,5 +16,13 @@ public class imageRename {
         int index=preName.lastIndexOf(".");
         String suffix=preName.substring(index);//获取后缀名
         return UUID.randomUUID().toString().replace("-","")+suffix;
+    }
+
+    public static CustomImage buildCustomImage(MultipartHttpServletRequest req) {
+        String openId = req.getParameter("openId");
+        Integer prodType = Integer.parseInt(req.getParameter("productionType"));
+        Integer imageType = Integer.parseInt(req.getParameter("imageType"));
+        String name = imageRename.name(req.getParameter("preName"));
+        return new CustomImage(openId, prodType, imageType, name);
     }
 }

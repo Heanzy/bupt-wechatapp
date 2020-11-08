@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.buptcc.wechatapp.dao.CustomimageDAO">
+<mapper namespace="com.buptcc.wechatapp.dao.CustomImageDAO">
   <resultMap id="BaseResultMap" type="com.buptcc.wechatapp.domain.CustomImage">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />

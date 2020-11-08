@@ -59,6 +59,13 @@ public class CustomImage implements Serializable {
         this.imageName = imageName;
     }
 
+    public CustomImage(String openId, Integer productionType, Integer imageType, String imageName) {
+        this.openId = openId;
+        this.productionType = productionType;
+        this.imageType = imageType;
+        this.imageName = imageName;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
