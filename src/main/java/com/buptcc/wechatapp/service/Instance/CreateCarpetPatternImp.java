@@ -62,7 +62,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
     }
 
 
-    //将角与边叠加
+    //获得边框的上下左右，以透明值为边界
     static int[] getBr(BufferedImage brink){
         int[] b = new int[4];
         int k = 200; //第200行中每一列的R值第一个大于246的点 +2是r，顺序为 B G R
@@ -131,6 +131,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         for (int i = 0; i < 300; i++) {
             for (int j = 0; j < 600; j++) {
                 int t = other.getRGB(j, i+50);
+                // 如果是透明像素
                 if ((t&0xff000000) == 0) {
                     other.setRGB(j,i+50, medal.getRGB(j,i));
                 }
@@ -162,6 +163,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
 
         for (int i = 0; i < m.getWidth(); i++) {
             for (int j = 0; j < m.getHeight(); j++) {
+                // 透明像素
                 if((m.getRGB(i,j)&0xff000000)>>24 == 0){
                     continue;
                 }
@@ -194,7 +196,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
 
         return m;
     }
-    private BufferedImage combine(String br, String c,String m){
+    private BufferedImage combine(String br, String c, String m){
         BufferedImage medal=null,corner=null,brink=null;
         try {
             medal = ImageIO.read(new File(m));
