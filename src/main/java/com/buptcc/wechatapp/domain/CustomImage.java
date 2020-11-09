@@ -59,6 +59,14 @@ public class CustomImage implements Serializable {
         this.imageName = imageName;
     }
 
+    public CustomImage(Integer id, String openId, Integer productionType, Integer imageType, String imageName) {
+        this.id = id;
+        this.openId = openId;
+        this.productionType = productionType;
+        this.imageType = imageType;
+        this.imageName = imageName;
+    }
+
     public CustomImage(String openId, Integer productionType, Integer imageType, String imageName) {
         this.openId = openId;
         this.productionType = productionType;

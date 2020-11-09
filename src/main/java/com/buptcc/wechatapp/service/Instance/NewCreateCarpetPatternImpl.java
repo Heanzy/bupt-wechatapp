@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class NewCreateCarpetPatternImpl extends CreateCarpetPatternImp{
 
@@ -21,14 +22,9 @@ public class NewCreateCarpetPatternImpl extends CreateCarpetPatternImp{
     @Autowired
     private UserOpenIdService userOpenIdService;
 
-    String systemPath = "/usr/webchatdata/data/";
+    private String systemPath = "/usr/webchatdata/data/";
 
-    String customPath = "/usr/webchatdata/data_custom/";
-
-    public static void main(String[] args) {
-        File f = new File("E:/xxfx.txt");
-        System.out.println(f.exists());
-    }
+    private String customPath = "/usr/webchatdata/data_custom/";
 
 
     @Override
@@ -61,6 +57,17 @@ public class NewCreateCarpetPatternImpl extends CreateCarpetPatternImp{
         return userImage.getImageName();
     }
 
+    @Override
+    public BufferedImage plusAll(BufferedImage other, BufferedImage medal) {
+        for (int i = 0; i < 300; i++) {
+            for (int j = 50; j < 550; j++) {
+                int t = other.getRGB(j, i+50);
+                other.setRGB(j,i+50, medal.getRGB(j,i));
+            }
+        }
+        return other;
+    }
+
     /**
      * 获取文件
      * @param name
@@ -75,7 +82,7 @@ public class NewCreateCarpetPatternImpl extends CreateCarpetPatternImp{
         }
     }
 
-    private BufferedImage combine(String br, String c,String m){
+    public BufferedImage combine(String br, String c,String m){
         BufferedImage medal=null,corner=null,brink=null;
         try {
             medal = ImageIO.read(getFile(m));
@@ -85,6 +92,7 @@ public class NewCreateCarpetPatternImpl extends CreateCarpetPatternImp{
 
         }
         int[] b = new int[]{50, 549, 50, 349};
+        System.out.println(Objects.isNull(corner));
         corner = colorTrans(corner,medal);
         brink = colorTrans(brink,medal);
         return plusAll(CornerPlusBrink(corner,brink,b),medal);

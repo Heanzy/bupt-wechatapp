@@ -63,7 +63,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
 
 
     //获得边框的上下左右，以透明值为边界
-    static int[] getBr(BufferedImage brink){
+    public int[] getBr(BufferedImage brink){
         int[] b = new int[4];
         int k = 200; //第200行中每一列的R值第一个大于246的点 +2是r，顺序为 B G R
         int z;
@@ -100,7 +100,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         return b;
     }
 
-    static BufferedImage CornerPlusBrink(BufferedImage corner, BufferedImage brink, int[] b) {
+    public BufferedImage CornerPlusBrink(BufferedImage corner, BufferedImage brink, int[] b) {
         if (corner!=null)
         {
             for(int i = 0; i < corner.getWidth(); i++){
@@ -127,7 +127,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         }
         return brink;
     }
-    static BufferedImage plusAll(BufferedImage other, BufferedImage medal) {
+    public BufferedImage plusAll(BufferedImage other, BufferedImage medal) {
         for (int i = 0; i < 300; i++) {
             for (int j = 0; j < 600; j++) {
                 int t = other.getRGB(j, i+50);
@@ -139,7 +139,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         }
         return other;
     }
-    static double[] pre(Integer a) {
+    public double[] pre(Integer a) {
         double[] c= new double[3];
         c[0] = (double)((a&0xff0000)>>16);
         c[1] = (double)((a&0xff00)>>8);
@@ -147,7 +147,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         return c;
     }
 
-    static double distance(double[] a, double[] b){
+    public double distance(double[] a, double[] b){
         double d = 0;
         for (int i = 0; i < 3; i++) {
             d+=Math.pow(a[i]-b[i],2);
@@ -155,7 +155,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         return d;
     }
 
-    static BufferedImage colorTrans(BufferedImage m, BufferedImage medal) {
+    public BufferedImage colorTrans(BufferedImage m, BufferedImage medal) {
         Map<Integer,Integer> map = new HashMap<>();//构建hashmap，避免重复计算
         Integer key;
         Integer val;
@@ -196,7 +196,7 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
 
         return m;
     }
-    private BufferedImage combine(String br, String c, String m){
+    public BufferedImage combine(String br, String c, String m){
         BufferedImage medal=null,corner=null,brink=null;
         try {
             medal = ImageIO.read(new File(m));
@@ -205,11 +205,28 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         } catch (IOException e) {
 
         }
-        int[] b = getBr(brink);
+        int[] b = new int[]{50, 549, 50, 349};
         corner = colorTrans(corner,medal);
         brink = colorTrans(brink,medal);
-        return plusAll(CornerPlusBrink(corner,brink,b),medal);
+        BufferedImage other = CornerPlusBrink(corner,brink,b);
+//        try {
+//            ImageIO.write(corner, "png", new File("F:/master/wechat/image/corner.png"));
+//            ImageIO.write(brink, "png", new File("F:/master/wechat/image/brink.png"));
+//            ImageIO.write(other, "png", new File("F:/master/wechat/image/other.png"));
+//        } catch (IOException e) {
+//
+//        }
+        return plusAll(other,medal);
 
     }
 
+//    public static void main(String[] args) {
+//        CreateCarpetPatternImp createCarpetPatternImp = new CreateCarpetPatternImp();
+//        BufferedImage res = createCarpetPatternImp.combine("F:\\master\\wechat\\image\\1.png", "F:\\master\\wechat\\image\\3.png", "F:\\master\\wechat\\image\\2.png");
+//        try {
+//            ImageIO.write(res, "png", new File("F:/master/wechat/image/k.png"));
+//        } catch (IOException e) {
+//
+//        }
+//    }
 }

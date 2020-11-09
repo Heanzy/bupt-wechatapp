@@ -10,7 +10,7 @@ import java.util.UUID;
  * @version 1.0
  * @date 2019/11/21 15:11
  */
-public class imageRename {
+public class imageUtils {
 
     public static String name(String preName){
         int index=preName.lastIndexOf(".");
@@ -22,7 +22,9 @@ public class imageRename {
         String openId = req.getParameter("openId");
         Integer prodType = Integer.parseInt(req.getParameter("productionType"));
         Integer imageType = Integer.parseInt(req.getParameter("imageType"));
-        String name = imageRename.name(req.getParameter("preName"));
+        String name = imageUtils.name(req.getParameter("preName"));
         return new CustomImage(openId, prodType, imageType, name);
     }
+
+    public static
 }

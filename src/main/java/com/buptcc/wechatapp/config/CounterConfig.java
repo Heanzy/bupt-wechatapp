@@ -18,7 +18,8 @@ public class CounterConfig {
     UserImageDao userImageDao;
     @Autowired
     CounterDao counterDao;
-    @Scheduled(cron = "0/30 * * * * ?")
+    // 每日零点更新
+    @Scheduled(cron = "0 0 0 * * ?")
     private void countTask() {
         int userCount = userImageDao.countByOpenId();
         Counter counter = new Counter(0,0,userCount);
