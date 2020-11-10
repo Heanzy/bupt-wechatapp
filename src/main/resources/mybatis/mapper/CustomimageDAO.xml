@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buptcc.wechatapp.dao.CustomImageDAO">
   <resultMap id="BaseResultMap" type="com.buptcc.wechatapp.domain.CustomImage">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="subject_type" jdbcType="INTEGER" property="subjectType" />
     <result column="production_type" jdbcType="INTEGER" property="productionType" />
     <result column="image_type" jdbcType="INTEGER" property="imageType" />
     <result column="image_name" jdbcType="VARCHAR" property="imageName" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, open_id, production_type, image_type, image_name
+    id, open_id, subject_type, production_type, image_type, image_name
   </sql>
   <select id="selectByExample" parameterType="com.buptcc.wechatapp.domain.CustomImageExample" resultMap="BaseResultMap">
     select
@@ -91,6 +92,16 @@
       </if>
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customimage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customimage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.buptcc.wechatapp.domain.CustomImageExample">
     delete from customimage
     <if test="_parameter != null">
@@ -98,16 +109,19 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.buptcc.wechatapp.domain.CustomImage" useGeneratedKeys="true">
-    insert into customimage (open_id, production_type, image_type, 
-      image_name)
-    values (#{openId,jdbcType=VARCHAR}, #{productionType,jdbcType=INTEGER}, #{imageType,jdbcType=INTEGER}, 
-      #{imageName,jdbcType=VARCHAR})
+    insert into customimage (open_id, subject_type, production_type, 
+      image_type, image_name)
+    values (#{openId,jdbcType=VARCHAR}, #{subjectType,jdbcType=INTEGER}, #{productionType,jdbcType=INTEGER}, 
+      #{imageType,jdbcType=INTEGER}, #{imageName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.buptcc.wechatapp.domain.CustomImage" useGeneratedKeys="true">
     insert into customimage
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="openId != null">
         open_id,
+      </if>
+      <if test="subjectType != null">
+        subject_type,
       </if>
       <if test="productionType != null">
         production_type,
@@ -122,6 +136,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="openId != null">
         #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null">
+        #{subjectType,jdbcType=INTEGER},
       </if>
       <if test="productionType != null">
         #{productionType,jdbcType=INTEGER},
@@ -149,6 +166,9 @@
       <if test="record.openId != null">
         open_id = #{record.openId,jdbcType=VARCHAR},
       </if>
+      <if test="record.subjectType != null">
+        subject_type = #{record.subjectType,jdbcType=INTEGER},
+      </if>
       <if test="record.productionType != null">
         production_type = #{record.productionType,jdbcType=INTEGER},
       </if>
@@ -167,11 +187,42 @@
     update customimage
     set id = #{record.id,jdbcType=INTEGER},
       open_id = #{record.openId,jdbcType=VARCHAR},
+      subject_type = #{record.subjectType,jdbcType=INTEGER},
       production_type = #{record.productionType,jdbcType=INTEGER},
       image_type = #{record.imageType,jdbcType=INTEGER},
       image_name = #{record.imageName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buptcc.wechatapp.domain.CustomImage">
+    update customimage
+    <set>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null">
+        subject_type = #{subjectType,jdbcType=INTEGER},
+      </if>
+      <if test="productionType != null">
+        production_type = #{productionType,jdbcType=INTEGER},
+      </if>
+      <if test="imageType != null">
+        image_type = #{imageType,jdbcType=INTEGER},
+      </if>
+      <if test="imageName != null">
+        image_name = #{imageName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.buptcc.wechatapp.domain.CustomImage">
+    update customimage
+    set open_id = #{openId,jdbcType=VARCHAR},
+      subject_type = #{subjectType,jdbcType=INTEGER},
+      production_type = #{productionType,jdbcType=INTEGER},
+      image_type = #{imageType,jdbcType=INTEGER},
+      image_name = #{imageName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -20,7 +20,7 @@ import java.util.UUID;
  * @version 1.0
  * @date 2019/11/21 15:11
  */
-public class imageUtils {
+public class ImageUtils {
 
     public static String name(String preName){
         int index=preName.lastIndexOf(".");
@@ -30,10 +30,11 @@ public class imageUtils {
 
     public static CustomImage buildCustomImage(MultipartHttpServletRequest req) {
         String openId = req.getParameter("openId");
-        Integer prodType = Integer.parseInt(req.getParameter("productionType"));
-        Integer imageType = Integer.parseInt(req.getParameter("imageType"));
-        String name = imageUtils.name(req.getParameter("preName"));
-        return new CustomImage(openId, prodType, imageType, name);
+        int subjectType = Integer.parseInt(req.getParameter("subjectType"));
+        int prodType = Integer.parseInt(req.getParameter("productionType"));
+        int imageType = Integer.parseInt(req.getParameter("imageType"));
+        String name = ImageUtils.name(req.getParameter("preName"));
+        return new CustomImage(openId, subjectType, prodType, imageType, name);
     }
 
 
@@ -45,7 +46,6 @@ public class imageUtils {
         BufferedImage srcImage = null;
         try {
             srcImage = ImageIO.read(srcImg);
-            System.out.println("srcImg size=" + srcImage.getWidth() + "X" + srcImage.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -65,7 +65,6 @@ public class imageUtils {
                     height = (int) (sy * srcImage.getHeight());
                 }
             }
-            System.out.println("destImg size=" + width + "X" + height);
             ColorModel cm = srcImage.getColorModel();
             WritableRaster raster;
             raster = cm.createCompatibleWritableRaster(width, height);

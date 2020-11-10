@@ -16,7 +16,7 @@ public class UserCustomImageController {
     UserCustomImageService userCustomImageService;
 
     @GetMapping("/customImage")
-    public Map<String, List<List<String>>> getUserCustomImage(String openId) {
-        return userCustomImageService.getUserCustomImage(openId);
+    public Map<String, List<List<String>>> getUserCustomImage(String openId, int subjectType) {
+        return userCustomImageService.getUserCustomImage(openId, subjectType);
     }
 }

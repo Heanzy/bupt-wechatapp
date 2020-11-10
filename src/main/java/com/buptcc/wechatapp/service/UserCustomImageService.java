@@ -5,5 +5,5 @@ import java.util.Map;
 
 public interface UserCustomImageService {
 
-    Map<String, List<List<String>>> getUserCustomImage(String openId);
+    Map<String, List<List<String>>> getUserCustomImage(String openId, int subjectType);
 }

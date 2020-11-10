@@ -11,6 +11,8 @@ public class CustomImage implements Serializable {
 
     private String openId;
 
+    private Integer subjectType;
+
     private Integer productionType;
 
     private Integer imageType;
@@ -33,6 +35,14 @@ public class CustomImage implements Serializable {
 
     public void setOpenId(String openId) {
         this.openId = openId;
+    }
+
+    public Integer getSubjectType() {
+        return subjectType;
+    }
+
+    public void setSubjectType(Integer subjectType) {
+        this.subjectType = subjectType;
     }
 
     public Integer getProductionType() {
@@ -59,16 +69,18 @@ public class CustomImage implements Serializable {
         this.imageName = imageName;
     }
 
-    public CustomImage(Integer id, String openId, Integer productionType, Integer imageType, String imageName) {
+    public CustomImage(Integer id, String openId, Integer subjectType, Integer productionType, Integer imageType, String imageName) {
         this.id = id;
         this.openId = openId;
+        this.subjectType = subjectType;
         this.productionType = productionType;
         this.imageType = imageType;
         this.imageName = imageName;
     }
 
-    public CustomImage(String openId, Integer productionType, Integer imageType, String imageName) {
+    public CustomImage(String openId, Integer subjectType, Integer productionType, Integer imageType, String imageName) {
         this.openId = openId;
+        this.subjectType = subjectType;
         this.productionType = productionType;
         this.imageType = imageType;
         this.imageName = imageName;
@@ -88,6 +100,7 @@ public class CustomImage implements Serializable {
         CustomImage other = (CustomImage) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()))
+            && (this.getSubjectType() == null ? other.getSubjectType() == null : this.getSubjectType().equals(other.getSubjectType()))
             && (this.getProductionType() == null ? other.getProductionType() == null : this.getProductionType().equals(other.getProductionType()))
             && (this.getImageType() == null ? other.getImageType() == null : this.getImageType().equals(other.getImageType()))
             && (this.getImageName() == null ? other.getImageName() == null : this.getImageName().equals(other.getImageName()));
@@ -99,6 +112,7 @@ public class CustomImage implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOpenId() == null) ? 0 : getOpenId().hashCode());
+        result = prime * result + ((getSubjectType() == null) ? 0 : getSubjectType().hashCode());
         result = prime * result + ((getProductionType() == null) ? 0 : getProductionType().hashCode());
         result = prime * result + ((getImageType() == null) ? 0 : getImageType().hashCode());
         result = prime * result + ((getImageName() == null) ? 0 : getImageName().hashCode());
@@ -113,6 +127,7 @@ public class CustomImage implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", openId=").append(openId);
+        sb.append(", subjectType=").append(subjectType);
         sb.append(", productionType=").append(productionType);
         sb.append(", imageType=").append(imageType);
         sb.append(", imageName=").append(imageName);

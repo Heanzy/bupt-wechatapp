@@ -254,6 +254,66 @@ public class CustomImageExample {
             return (Criteria) this;
         }
 
+        public Criteria andSubjectTypeIsNull() {
+            addCriterion("subject_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeIsNotNull() {
+            addCriterion("subject_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeEqualTo(Integer value) {
+            addCriterion("subject_type =", value, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeNotEqualTo(Integer value) {
+            addCriterion("subject_type <>", value, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeGreaterThan(Integer value) {
+            addCriterion("subject_type >", value, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("subject_type >=", value, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeLessThan(Integer value) {
+            addCriterion("subject_type <", value, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("subject_type <=", value, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeIn(List<Integer> values) {
+            addCriterion("subject_type in", values, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeNotIn(List<Integer> values) {
+            addCriterion("subject_type not in", values, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeBetween(Integer value1, Integer value2) {
+            addCriterion("subject_type between", value1, value2, "subjectType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubjectTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("subject_type not between", value1, value2, "subjectType");
+            return (Criteria) this;
+        }
+
         public Criteria andProductionTypeIsNull() {
             addCriterion("production_type is null");
             return (Criteria) this;

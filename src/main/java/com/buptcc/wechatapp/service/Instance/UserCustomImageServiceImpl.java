@@ -19,23 +19,24 @@ public class UserCustomImageServiceImpl implements UserCustomImageService {
     CustomImageDAO customImageDAO;
 
     @Override
-    public Map<String, List<List<String>>> getUserCustomImage(String openId) {
+    public Map<String, List<List<String>>> getUserCustomImage(String openId, int subjectType) {
         Map<String, List<List<String>>> map = new HashMap<>();
         String[] type = new String[]{"b", "c"};
         for (int i = 0; i < 2; i++) {
             List<List<String>> list = new ArrayList<>();
             for (int j = 0; j <= i+1; j++) {
-                list.add(getImageName(openId, i, j));
+                list.add(getImageName(openId, i, j, subjectType));
             }
             map.put(type[i], list);
         }
         return map;
     }
 
-    private List<String> getImageName(String openId, Integer prodType, Integer imageType) {
+    private List<String> getImageName(String openId, Integer prodType, Integer imageType, Integer subjectType) {
         CustomImageExample example = new CustomImageExample();
         CustomImageExample.Criteria criteria = example.createCriteria();
         criteria.andOpenIdEqualTo(openId);
+        criteria.andSubjectTypeEqualTo(subjectType);
         criteria.andProductionTypeEqualTo(prodType);
         criteria.andImageTypeEqualTo(imageType);
         List<CustomImage> images = customImageDAO.selectByExample(example);
