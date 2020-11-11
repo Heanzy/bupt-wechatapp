@@ -17,6 +17,7 @@ public class ImageURLPatternConfiguration extends WebMvcConfigurationSupport {
         // remoterestults
         registry.addResourceHandler("mini/image_results/**").addResourceLocations("file:/usr/webchatdata/result/");
         registry.addResourceHandler("mini/image_resources/**").addResourceLocations("file:/usr/webchatdata/data/");
+        registry.addResourceHandler("mini/image_custom/**").addResourceLocations("file:/usr/webchatdata/data_custom/");
         super.addResourceHandlers(registry);
     }
 
