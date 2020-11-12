@@ -21,7 +21,7 @@ public class ImageReceiveServiceImpl implements ImageReceiveService {
     @Autowired
     CustomImageDAO customImageDAO;
 
-    final int[][] size = {{500, 300}, {600, 400}, {80, 80}};
+    final int[][][] size = {{{500, 500}, {500, 500}},{{500, 300}, {600, 400}, {80, 80}}};
     @Override
     public String saveImage(MultipartHttpServletRequest req) throws IOException {
         MultipartFile file = req.getFile("file");
@@ -35,7 +35,7 @@ public class ImageReceiveServiceImpl implements ImageReceiveService {
         File f = new File(realPath, customImage.getImageName());
         if (!Objects.isNull(file)) {
             file.transferTo(f);
-            int[] imageSize = size[customImage.getImageType()];
+            int[] imageSize = size[customImage.getProductionType()][customImage.getImageType()];
             ImageUtils.reSize(f, imageSize[0], imageSize[1], false);
         }
         customImageDAO.insert(customImage);
