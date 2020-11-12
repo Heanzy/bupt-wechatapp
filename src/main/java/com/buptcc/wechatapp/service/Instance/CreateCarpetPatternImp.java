@@ -8,6 +8,7 @@ import com.buptcc.wechatapp.domain.Counter;
 import com.buptcc.wechatapp.domain.UserImage;
 import com.buptcc.wechatapp.service.UserOpenIdService;
 import com.buptcc.wechatapp.service.CreateCarpetPatternService;
+import com.buptcc.wechatapp.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.imageio.ImageIO;
@@ -30,12 +31,15 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
     private UserImageDao userImageDao;
     @Autowired
     private UserOpenIdService userOpenIdService;
+    private String systemPath = "/usr/webchatdata/data/";
+
+    private String customPath = "/usr/webchatdata/data_custom/";
+
     @Override
     public String Combine(String  ename, String cname, String mname, String openId){
 
-        final String path="/usr/webchatdata/data/";
         //read
-        BufferedImage res = combine(path+ename+".png", path+cname+".png", path+mname+".png");
+        BufferedImage res = combine(ImageUtils.addSuffix(ename), ImageUtils.addSuffix(cname), ImageUtils.addSuffix(mname));
         //write
         //获取图片计数
         Counter counter = counterDao.getCounter(Counter.getCounterId());
@@ -105,40 +109,63 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
         {
             for(int i = 0; i < corner.getWidth(); i++){
                 for (int j = 0; j < corner.getHeight(); j++) {
-                    brink.setRGB(i+b[0],j+b[2],corner.getRGB(i,j));
+                    int rgb = corner.getRGB(i, j);
+                    if((rgb&0xff000000)>>24 == 0){
+                        continue;
+                    }
+                    brink.setRGB(i+b[0],j+b[2],rgb);
                 }
             }
             for(int i = corner.getWidth()-1; i >=0; i--){
                 for (int j = 0; j < corner.getHeight(); j++) {
-                    brink.setRGB(b[1]-i,j+b[2],corner.getRGB(i,j));
+                    int rgb = corner.getRGB(i, j);
+                    if((rgb&0xff000000)>>24 == 0){
+                        continue;
+                    }
+                    brink.setRGB(b[1]-i,j+b[2],rgb);
                 }
             }
 
             for(int i = 0; i < corner.getWidth(); i++){
                 for (int j = corner.getHeight()-1; j >=0 ; j--) {
-                    brink.setRGB(i+b[0],b[3]-j,corner.getRGB(i,j));
+                    int rgb = corner.getRGB(i, j);
+                    if((rgb&0xff000000)>>24 == 0){
+                        continue;
+                    }
+                    brink.setRGB(i+b[0],b[3]-j,rgb);
                 }
             }
             for(int i = corner.getWidth()-1; i >=0; i--){
                 for (int j = corner.getHeight()-1; j >=0 ; j--) {
-                    brink.setRGB(b[1]-i,b[3]-j,corner.getRGB(i,j));
+                    int rgb = corner.getRGB(i, j);
+                    if((rgb&0xff000000)>>24 == 0){
+                        continue;
+                    }
+                    brink.setRGB(b[1]-i,b[3]-j,rgb);
                 }
             }
         }
         return brink;
     }
+
     public BufferedImage plusAll(BufferedImage other, BufferedImage medal) {
         for (int i = 0; i < 300; i++) {
-            for (int j = 0; j < 600; j++) {
-                int t = other.getRGB(j, i+50);
-                // 如果是透明像素
-                if ((t&0xff000000) == 0) {
-                    other.setRGB(j,i+50, medal.getRGB(j,i));
-                }
+            for (int j = 50; j < 550; j++) {
+                other.setRGB(j,i+50, medal.getRGB(j,i));
             }
         }
         return other;
     }
+
+    public BufferedImage plusAllCustom(BufferedImage other, BufferedImage medal) {
+        for (int i = 0; i < 300; i++) {
+            for (int j = 0; j < 500; j++) {
+                other.setRGB(j+50,i+50, medal.getRGB(j,i));
+            }
+        }
+        return other;
+    }
+
     public double[] pre(Integer a) {
         double[] c= new double[3];
         c[0] = (double)((a&0xff0000)>>16);
@@ -196,37 +223,41 @@ public class CreateCarpetPatternImp implements CreateCarpetPatternService {
 
         return m;
     }
+
+    /**
+     * 获取文件
+     * @param name
+     * @return
+     */
+    private File getFile(String name) {
+        File file = new File(systemPath + name);
+        if (file.exists()){
+            return file;
+        }else {
+            return new File(customPath + name);
+        }
+    }
+
     public BufferedImage combine(String br, String c, String m){
         BufferedImage medal=null,corner=null,brink=null;
         try {
-            medal = ImageIO.read(new File(m));
-            corner = ImageIO.read(new File(c));
-            brink = ImageIO.read(new File(br));
+            medal = ImageIO.read(getFile(m));
+            corner = ImageIO.read(getFile(c));
+            brink = ImageIO.read(getFile(br));
         } catch (IOException e) {
 
         }
         int[] b = new int[]{50, 549, 50, 349};
         corner = colorTrans(corner,medal);
         brink = colorTrans(brink,medal);
-        BufferedImage other = CornerPlusBrink(corner,brink,b);
-//        try {
-//            ImageIO.write(corner, "png", new File("F:/master/wechat/image/corner.png"));
-//            ImageIO.write(brink, "png", new File("F:/master/wechat/image/brink.png"));
-//            ImageIO.write(other, "png", new File("F:/master/wechat/image/other.png"));
-//        } catch (IOException e) {
-//
-//        }
-        return plusAll(other,medal);
+        BufferedImage other = null;
+        if (ImageUtils.judgeCustomImage(m)){
+            other = plusAllCustom(brink,medal);
+        }else {
+            other = plusAll(brink, medal);
+        }
 
+        return CornerPlusBrink(corner, other, b);
     }
 
-//    public static void main(String[] args) {
-//        CreateCarpetPatternImp createCarpetPatternImp = new CreateCarpetPatternImp();
-//        BufferedImage res = createCarpetPatternImp.combine("F:\\master\\wechat\\image\\1.png", "F:\\master\\wechat\\image\\3.png", "F:\\master\\wechat\\image\\2.png");
-//        try {
-//            ImageIO.write(res, "png", new File("F:/master/wechat/image/k.png"));
-//        } catch (IOException e) {
-//
-//        }
-//    }
 }

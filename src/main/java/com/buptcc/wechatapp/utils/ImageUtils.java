@@ -90,4 +90,15 @@ public class ImageUtils {
         }
     }
 
+    public static boolean judgeCustomImage(String name) {
+        return name.length() > 15;
+    }
+
+    public static String addSuffix(String name){
+        if (name.length() >10 || name.endsWith(".png")){
+            return name;
+        }else {
+            return name + ".png";
+        }
+    }
 }
