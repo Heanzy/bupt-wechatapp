@@ -6,13 +6,16 @@ import com.buptcc.wechatapp.dao.UserImageDao;
 import com.buptcc.wechatapp.domain.Counter;
 import com.buptcc.wechatapp.domain.UserImage;
 import com.buptcc.wechatapp.service.CreateBagPatternService;
+import com.buptcc.wechatapp.utils.ImageName2MatName;
+import com.buptcc.wechatapp.utils.ImageUtils;
 import com.buptcc.wechatapp.utils.Lab2Rgb;
+import com.buptcc.wechatapp.utils.PreSolve;
 import com.jmatio.io.MatFileReader;
 import com.jmatio.types.MLArray;
 import com.jmatio.types.MLDouble;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -32,10 +35,19 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
     UserImageDao userImageDao;
     @Autowired
     UserImage userImage;
+
     @Override
     public String createBagPattern(String openId, String pName, String cName) {
-        BufferedImage bufferedImage = new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);
         long startTime=System.currentTimeMillis();
+        if (ImageUtils.judgeCustomImage(cName) || ImageUtils.judgeCustomImage(pName)) {
+            cName = ImageUtils.removeSuffix(cName);
+            pName = ImageUtils.removeSuffix(pName);
+            preSolve(cName, pName);
+        }else {
+            pName = ImageName2MatName.imageName2MatName(pName);
+            cName = ImageName2MatName.imageName2MatName(cName);
+        }
+        BufferedImage bufferedImage = new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);
         try {
             MatFileReader matFileReaderTarget = new MatFileReader("/usr/webchatdata/data/"+pName+".mat");
             MatFileReader matFileReaderColorSyle = new MatFileReader("/usr/webchatdata/data/"+cName+".mat");
@@ -87,9 +99,9 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
             long endTime=System.currentTimeMillis();
             System.out.println("运行时间："+(double)(endTime-startTime)/1000+"s");
             //更新计数表
-        Counter counter = counterDao.getCounter(Counter.getCounterId());
-        counter.setImageCounter(counter.getImageCounter()+1);
-        counterDao.updateImageCounter(counter);
+            Counter counter = counterDao.getCounter(Counter.getCounterId());
+            counter.setImageCounter(counter.getImageCounter()+1);
+            counterDao.updateImageCounter(counter);
 
             //更新UserImage表
             userImage.setUserId(openId);
@@ -104,6 +116,17 @@ public class CreateBagPatternServiceImp implements CreateBagPatternService {
         System.out.println(pName.substring(0,3));
         return userImage.getImageName();
     }
+
+    public void preSolve(String cname, String pname){
+        try {
+            PreSolve.exec(cname, pname);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int [] BestMatch(double[][] ColorStyle, double[][] target){
         int [] result = new int[target.length];
         for(int i = 0;i < target.length; i++){

@@ -42,4 +42,12 @@ public class UserCustomImageServiceImpl implements UserCustomImageService {
         List<CustomImage> images = customImageDAO.selectByExample(example);
         return images.stream().map(CustomImage::getImageName).collect(Collectors.toList());
     }
+
+    public boolean deleteCustom(String openId, String name){
+        CustomImageExample example = new CustomImageExample();
+        CustomImageExample.Criteria criteria = example.createCriteria();
+        criteria.andOpenIdEqualTo(openId);
+        criteria.andImageNameEqualTo(name);
+        return customImageDAO.deleteByExample(example) == 1;
+    }
 }

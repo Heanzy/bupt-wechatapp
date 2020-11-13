@@ -32,7 +32,7 @@ public class CreatePatternController {
     public CreateMesage createBp(@RequestParam("openId") String openId,
                                  @RequestParam("pName") String pName,
                                  @RequestParam("cName") String cName){
-        createMesage.setrName(createBagPatternService.createBagPattern(openId,ImageName2MatName.imageName2MatName(pName),ImageName2MatName.imageName2MatName(cName)));
+        createMesage.setrName(createBagPatternService.createBagPattern(openId,pName,cName));
         return createMesage;
     }
 

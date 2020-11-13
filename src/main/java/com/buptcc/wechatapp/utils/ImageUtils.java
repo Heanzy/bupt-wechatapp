@@ -28,6 +28,14 @@ public class ImageUtils {
         return UUID.randomUUID().toString().replace("-","")+suffix;
     }
 
+    public static String removeSuffix(String name){
+        int index = name.indexOf(".");
+        if (index != -1){
+            return name.substring(0, name.indexOf("."));
+        }
+        return name;
+    }
+
     public static CustomImage buildCustomImage(MultipartHttpServletRequest req) {
         String openId = req.getParameter("openId");
         int subjectType = Integer.parseInt(req.getParameter("subjectType"));
